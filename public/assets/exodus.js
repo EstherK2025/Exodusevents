@@ -1,21 +1,115 @@
 /* ───────────────────────────────────────────────────────────
    Exodus Events Agency — interactions du site
-   (menu, apparitions, poussière d'or, compositeur de parfum,
-   formulaire de devis en étapes)
+   Intro cinématique · rideau entre les pages · logo en particules
+   (souris, doigt, gyroscope, défilement) · curseur personnalisé ·
+   boutons magnétiques · titres qui montent · texte qui s'allume ·
+   bandeau lié au défilement · services en défilement horizontal ·
+   aperçus flottants · confettis (secouer le téléphone) · formulaires.
    ─────────────────────────────────────────────────────────── */
 (function () {
   "use strict";
-  document.documentElement.classList.add("js");
+  var root = document.documentElement;
+  root.classList.add("js");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+  var store = {
+    get: function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
+  };
+  var buzz = function (ms) { if (navigator.vibrate) { try { navigator.vibrate(ms); } catch (e) {} } };
+
+  /* ── Mouvement de l'appareil (partagé : particules, inclinaisons, secousse) ── */
+  var tilt = { x: 0, y: 0, active: false };
+  var shakeHandlers = [];
+  (function () {
+    var base = null, last = 0;
+    function orient(e) {
+      if (e.beta == null || e.gamma == null) return;
+      if (!base) base = { b: e.beta, g: e.gamma };
+      tilt.x = clamp((e.gamma - base.g) / 22, -1, 1);
+      tilt.y = clamp((e.beta - base.b) / 22, -1, 1);
+      tilt.active = true;
+    }
+    function motion(e) {
+      var a = e.accelerationIncludingGravity || e.acceleration;
+      if (!a) return;
+      var f = Math.abs(a.x || 0) + Math.abs(a.y || 0) + Math.abs(a.z || 0);
+      var now = Date.now();
+      if (f > 42 && now - last > 1500) { last = now; shakeHandlers.forEach(function (h) { h(); }); }
+    }
+    function brancher() {
+      window.addEventListener("deviceorientation", orient);
+      window.addEventListener("devicemotion", motion);
+    }
+    if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === "function") {
+      // iPhone : autorisation demandée au premier toucher
+      window.addEventListener("touchend", function () {
+        Promise.all([
+          DeviceOrientationEvent.requestPermission().catch(function () { return "denied"; }),
+          window.DeviceMotionEvent && DeviceMotionEvent.requestPermission ? DeviceMotionEvent.requestPermission().catch(function () { return "denied"; }) : "granted"
+        ]).then(function (r) { if (r[0] === "granted" || r[1] === "granted") brancher(); });
+      }, { once: true });
+    } else if (window.DeviceOrientationEvent) {
+      brancher();
+    }
+  })();
+
+  /* ── Intro cinématique (première visite de la session) ── */
+  if (!reduceMotion && $("[data-hero]") && !store.get("exodus-intro")) {
+    store.set("exodus-intro", "1");
+    var intro = document.createElement("div");
+    intro.className = "intro";
+    intro.setAttribute("aria-hidden", "true");
+    intro.innerHTML = '<div class="intro-word">' + "EXODUS".split("").map(function (l, i) { return '<span style="--i:' + i + '">' + l + "</span>"; }).join("") +
+      '</div><div class="intro-sub">Events Agency · Est. 2026</div><div class="intro-bar"></div>';
+    document.body.appendChild(intro);
+    root.style.overflow = "hidden";
+    var fini = false;
+    var sortir = function () {
+      if (fini) return; fini = true;
+      intro.classList.add("out");
+      root.style.overflow = "";
+      document.dispatchEvent(new Event("exodus:ready"));
+      setTimeout(function () { intro.remove(); }, 1000);
+    };
+    intro.addEventListener("click", sortir);
+    setTimeout(sortir, 2100);
+  } else {
+    setTimeout(function () { document.dispatchEvent(new Event("exodus:ready")); }, 0);
+  }
+
+  /* ── Rideau entre les pages ─────────────────────────── */
+  var curtain = document.createElement("div");
+  curtain.className = "curtain";
+  curtain.innerHTML = '<img src="/assets/logos/monogramme-blanc.png" alt="">';
+  document.body.appendChild(curtain);
+  if (!reduceMotion && store.get("exodus-curtain")) {
+    store.set("exodus-curtain", "");
+    curtain.classList.add("start");
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      curtain.classList.remove("start"); curtain.classList.add("leave");
+      setTimeout(function () { curtain.classList.remove("leave"); }, 900);
+    }); });
+  }
+  window.addEventListener("pageshow", function (e) { if (e.persisted) curtain.classList.remove("cover", "leave"); });
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest("a[href]");
+    if (!a || reduceMotion || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+    var url = new URL(a.href, location.href);
+    if (a.target || a.hasAttribute("download") || url.origin !== location.origin) return;
+    if (url.pathname === location.pathname && url.hash) return;
+    if (/^(mailto|tel):/.test(a.getAttribute("href"))) return;
+    e.preventDefault();
+    buzz(8);
+    store.set("exodus-curtain", "1");
+    curtain.classList.add("cover");
+    setTimeout(function () { location.href = url.href; }, 560);
+  });
 
   /* ── En-tête & menu mobile ─────────────────────────── */
-  var header = $(".site-header");
-  function onScroll() { if (header) header.classList.toggle("is-scrolled", window.scrollY > 30); }
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
-
   var toggle = $(".menu-toggle");
   var menu = $(".mobile-menu");
   function setMenu(open) {
@@ -23,88 +117,319 @@
     if (toggle) {
       toggle.setAttribute("aria-expanded", String(open));
       toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+      var t = $("i", toggle); if (t) t.textContent = open ? "Fermer" : "Menu";
     }
     if (menu) menu.setAttribute("aria-hidden", String(!open));
   }
-  if (toggle) toggle.addEventListener("click", function () { setMenu(!document.body.classList.contains("menu-open")); });
-  if (menu) $$("a", menu).forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+  if (toggle) toggle.addEventListener("click", function () { buzz(6); setMenu(!document.body.classList.contains("menu-open")); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
 
   /* ── Année du pied de page ─────────────────────────── */
   $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
-  /* ── Apparitions au défilement ─────────────────────── */
-  var reveals = $$(".reveal, .reveal-line");
-  if ("IntersectionObserver" in window && !reduceMotion) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+  /* ── Titres : mots qui montent ──────────────────────── */
+  function decouper(el) {
+    var i = 0;
+    (function walk(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var parts = n.textContent.split(/(\s+)/);
+          var frag = document.createDocumentFragment();
+          parts.forEach(function (p) {
+            if (!p) return;
+            if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+            var w = document.createElement("span"); w.className = "w";
+            var wi = document.createElement("span"); wi.className = "wi"; wi.style.setProperty("--i", i++);
+            wi.textContent = p; w.appendChild(wi); frag.appendChild(w);
+          });
+          n.parentNode.replaceChild(frag, n);
+        } else if (n.nodeType === 1 && n.tagName !== "BR") walk(n);
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-    reveals.forEach(function (el) { io.observe(el); });
-  } else {
-    reveals.forEach(function (el) { el.classList.add("in"); });
+    })(el);
+    el.classList.add("split-done");
   }
+  if (!reduceMotion) $$(".display, .h2").forEach(function (el) { if (!el.closest(".hs-card, .feature-body")) decouper(el); });
 
-  /* ── Halo qui suit le curseur sur les cartes services ─ */
-  $$(".service").forEach(function (card) {
-    card.addEventListener("pointermove", function (e) {
-      var r = card.getBoundingClientRect();
-      card.style.setProperty("--mx", ((e.clientX - r.left) / r.width) * 100 + "%");
-      card.style.setProperty("--my", ((e.clientY - r.top) / r.height) * 100 + "%");
+  /* ── Apparitions au défilement ─────────────────────── */
+  function observer() {
+    var cibles = $$(".reveal, .reveal-line, .split-done");
+    if ("IntersectionObserver" in window && !reduceMotion) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+      cibles.forEach(function (el) { io.observe(el); });
+    } else cibles.forEach(function (el) { el.classList.add("in"); });
+  }
+  document.addEventListener("exodus:ready", observer, { once: true });
+
+  /* ── Curseur personnalisé & boutons magnétiques (ordinateur) ── */
+  if (finePointer && !reduceMotion) {
+    root.classList.add("has-cursor");
+    var dot = document.createElement("div"); dot.className = "cursor";
+    var ring = document.createElement("div"); ring.className = "cursor-ring"; ring.innerHTML = "<span></span>";
+    document.body.appendChild(dot); document.body.appendChild(ring);
+    var m = { x: innerWidth / 2, y: innerHeight / 2 }, r = { x: m.x, y: m.y };
+    window.addEventListener("pointermove", function (e) {
+      m.x = e.clientX; m.y = e.clientY;
+      dot.style.transform = "translate(" + m.x + "px," + m.y + "px)";
+    }, { passive: true });
+    (function suivre() {
+      r.x += (m.x - r.x) * 0.16; r.y += (m.y - r.y) * 0.16;
+      ring.style.transform = "translate(" + r.x + "px," + r.y + "px)";
+      requestAnimationFrame(suivre);
+    })();
+    document.addEventListener("mouseover", function (e) {
+      var lab = e.target.closest("[data-cursor]");
+      var hov = e.target.closest("a, button, input, select, textarea, label, summary");
+      ring.classList.toggle("big", !!lab);
+      ring.classList.toggle("hover", !lab && !!hov);
+      $("span", ring).textContent = lab ? lab.getAttribute("data-cursor") : "";
     });
-  });
+    document.addEventListener("mouseleave", function () { dot.style.opacity = ring.style.opacity = "0"; });
+    document.addEventListener("mouseenter", function () { dot.style.opacity = ring.style.opacity = ""; });
 
-  /* ── Poussière d'or (héros) ────────────────────────── */
-  var canvas = $("#gold-dust");
-  if (canvas && canvas.getContext) {
-    var ctx = canvas.getContext("2d");
-    var parts = [], W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), running = true, raf;
-    function size() {
-      W = canvas.offsetWidth; H = canvas.offsetHeight;
-      canvas.width = W * dpr; canvas.height = H * dpr;
+    $$(".btn, [data-magnetic]").forEach(function (b) {
+      b.addEventListener("pointermove", function (e) {
+        var rc = b.getBoundingClientRect();
+        var dx = e.clientX - (rc.left + rc.width / 2), dy = e.clientY - (rc.top + rc.height / 2);
+        b.style.transform = "translate(" + dx * 0.22 + "px," + dy * 0.3 + "px)";
+        b.style.setProperty("--bx", (e.clientX - rc.left) + "px");
+        b.style.setProperty("--by", (e.clientY - rc.top) + "px");
+      });
+      b.addEventListener("pointerleave", function () { b.style.transform = ""; });
+    });
+  }
+  $$(".btn").forEach(function (b) { b.addEventListener("pointerdown", function () { buzz(10); }); });
+
+  /* ── Logo en particules ─────────────────────────────── */
+  var cvs = $("[data-particles]");
+  if (cvs && cvs.getContext && !reduceMotion) {
+    var ctx = cvs.getContext("2d");
+    var img = new Image();
+    img.src = cvs.getAttribute("data-particles");
+    var parts = [], W = 0, H = 0, dpr = Math.min(devicePixelRatio || 1, 2);
+    var pointer = { x: -9999, y: -9999, down: false };
+    var hero = $("[data-hero]");
+    var hint = $("[data-hint]");
+    if (hint && !finePointer) hint.textContent = "Touchez le logo · inclinez votre téléphone";
+
+    function construire() {
+      W = cvs.clientWidth; H = cvs.clientHeight;
+      if (!W || !H) return;
+      cvs.width = W * dpr; cvs.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var n = Math.round(Math.min(90, (W * H) / 14000));
+      var lw = Math.min(W * 0.92, 1000), lh = lw * img.naturalHeight / img.naturalWidth;
+      if (lh > H * 0.9) { lh = H * 0.9; lw = lh * img.naturalWidth / img.naturalHeight; }
+      var gap = W < 600 ? 3 : 4;
+      var off = document.createElement("canvas");
+      off.width = Math.round(lw); off.height = Math.round(lh);
+      var o = off.getContext("2d");
+      o.drawImage(img, 0, 0, off.width, off.height);
+      var data = o.getImageData(0, 0, off.width, off.height).data;
+      var ox = (W - lw) / 2, oy = (H - lh) / 2, anciens = parts;
       parts = [];
-      for (var i = 0; i < n; i++) parts.push(spawn(true));
+      for (var y = 0; y < off.height; y += gap) {
+        for (var x = 0; x < off.width; x += gap) {
+          var k = (y * off.width + x) * 4;
+          if (data[k + 3] < 120) continue;
+          var rr = data[k], gg = data[k + 1], bb = data[k + 2];
+          var or = (rr - bb) > 50;                      // pixels dorés du logo
+          var prev = anciens[parts.length];
+          parts.push({
+            hx: ox + x + (Math.random() - 0.5) * gap * 0.6, hy: oy + y + (Math.random() - 0.5) * gap * 0.6,
+            x: prev ? prev.x : Math.random() * W, y: prev ? prev.y : (Math.random() < 0.5 ? -20 : H + 20) + (Math.random() - 0.5) * H,
+            vx: 0, vy: 0, z: 0.35 + Math.random() * 0.9,
+            s: gap * (0.45 + Math.random() * 0.45),
+            c: or ? 1 : 0,
+            a: Math.random() * Math.PI * 2
+          });
+        }
+      }
     }
-    function spawn(anywhere) {
-      return {
-        x: Math.random() * W,
-        y: anywhere ? Math.random() * H : H + 10,
-        r: Math.random() * 1.6 + 0.3,
-        vy: Math.random() * 0.35 + 0.08,
-        vx: (Math.random() - 0.5) * 0.15,
-        a: Math.random() * 0.6 + 0.2,
-        t: Math.random() * Math.PI * 2
-      };
-    }
-    function draw() {
+
+    function coords(e) { var rc = cvs.getBoundingClientRect(); pointer.x = e.clientX - rc.left; pointer.y = e.clientY - rc.top; }
+    cvs.addEventListener("pointermove", coords);
+    cvs.addEventListener("pointerdown", function (e) { coords(e); pointer.down = true; buzz(14); });
+    window.addEventListener("pointerup", function () { pointer.down = false; });
+    cvs.addEventListener("pointerleave", function () { pointer.x = pointer.y = -9999; pointer.down = false; });
+    var souris = { x: 0, y: 0 };
+    if (finePointer) window.addEventListener("pointermove", function (e) { souris.x = (e.clientX / innerWidth - 0.5) * 2; souris.y = (e.clientY / innerHeight - 0.5) * 2; }, { passive: true });
+
+    var visible = true, t = 0;
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(cvs);
+
+    function frame() {
+      requestAnimationFrame(frame);
+      if (!visible || !parts.length) return;
+      t += 0.016;
+      var rc = hero.getBoundingClientRect();
+      var scatter = clamp(-rc.top / (rc.height * 0.7), 0, 1);  // défilement : le logo s'envole
+      var tx = tilt.active ? tilt.x : souris.x * 0.6, ty = tilt.active ? tilt.y : souris.y * 0.6;
+      var R = pointer.down ? 170 : 110, R2 = R * R;
       ctx.clearRect(0, 0, W, H);
+      var blancs = [], ors = [];
       for (var i = 0; i < parts.length; i++) {
         var p = parts[i];
-        p.t += 0.02; p.y -= p.vy; p.x += p.vx + Math.sin(p.t) * 0.12;
-        if (p.y < -10) parts[i] = p = spawn(false);
-        var tw = p.a * (0.6 + 0.4 * Math.sin(p.t * 1.7));
-        ctx.beginPath();
-        ctx.fillStyle = "rgba(233,207,150," + tw.toFixed(3) + ")";
-        ctx.shadowColor = "rgba(212,175,110,0.8)";
-        ctx.shadowBlur = p.r * 4;
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
+        var gx = p.hx + tx * 26 * p.z + Math.cos(p.a + t) * scatter * 260 * p.z;
+        var gy = p.hy + ty * 18 * p.z - scatter * 420 * p.z + Math.sin(p.a + t) * scatter * 80;
+        p.vx += (gx - p.x) * 0.055; p.vy += (gy - p.y) * 0.055;
+        var dx = p.x - pointer.x, dy = p.y - pointer.y, d2 = dx * dx + dy * dy;
+        if (d2 < R2) { var f = (1 - d2 / R2) * (pointer.down ? 9 : 5); var d = Math.sqrt(d2) || 1; p.vx += dx / d * f; p.vy += dy / d * f; }
+        p.vx *= 0.8; p.vy *= 0.8; p.x += p.vx; p.y += p.vy;
+        (p.c ? ors : blancs).push(p);
       }
-      if (running && !reduceMotion) raf = requestAnimationFrame(draw);
+      ctx.globalAlpha = 1 - scatter * 0.85;
+      ctx.fillStyle = "#ffffff";
+      for (i = 0; i < blancs.length; i++) { p = blancs[i]; ctx.fillRect(p.x, p.y, p.s, p.s); }
+      ctx.fillStyle = "#d4ad62";
+      for (i = 0; i < ors.length; i++) { p = ors[i]; ctx.fillRect(p.x, p.y, p.s, p.s); }
     }
-    size(); draw();
-    window.addEventListener("resize", function () { size(); if (reduceMotion) draw(); });
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (en) {
-        var vis = en[0].isIntersecting;
-        if (vis && !running) { running = true; if (!reduceMotion) draw(); }
-        else if (!vis) { running = false; cancelAnimationFrame(raf); }
-      }).observe(canvas);
-    }
+    img.onload = function () {
+      root.classList.add("has-particles");
+      document.body.classList.add("has-particles");
+      construire(); frame();
+      var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(construire, 150); });
+    };
   }
+
+  /* ── Inclinaison 3D d'éléments (souris ou téléphone) ── */
+  $$("[data-tilt]").forEach(function (el) {
+    if (reduceMotion) return;
+    el.style.transition = "transform .6s cubic-bezier(.16,1,.3,1)";
+    var mx = 0, my = 0;
+    if (finePointer) {
+      el.addEventListener("pointermove", function (e) { var rc = el.getBoundingClientRect(); mx = (e.clientX - rc.left) / rc.width - 0.5; my = (e.clientY - rc.top) / rc.height - 0.5; });
+      el.addEventListener("pointerleave", function () { mx = my = 0; });
+    }
+    (function boucle() {
+      var x = tilt.active ? tilt.x * 0.5 : mx, y = tilt.active ? tilt.y * 0.5 : my;
+      el.style.transform = "perspective(900px) rotateY(" + (x * 12).toFixed(2) + "deg) rotateX(" + (-y * 10).toFixed(2) + "deg)";
+      requestAnimationFrame(boucle);
+    })();
+  });
+
+  /* ── Défilement : bandeau, texte qui s'allume, services horizontaux ── */
+  var vm = $("[data-vmarquee] .vtrack"), vmX = 0, lastY = scrollY, vel = 0, dir = 1;
+  var fills = $$("[data-fill]").map(function (el) {
+    if (reduceMotion) return null;
+    var mots = [];
+    (function walk(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function (p) {
+            if (!p) return;
+            if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+            var s = document.createElement("span"); s.className = "fw"; s.textContent = p; frag.appendChild(s); mots.push(s);
+          });
+          n.parentNode.replaceChild(frag, n);
+        } else if (n.nodeType === 1) walk(n);
+      });
+    })(el);
+    return { el: el, mots: mots };
+  }).filter(Boolean);
+
+  var hsEl = $("[data-hscroll]"), hsTrack = hsEl && $(".hs-track", hsEl), hsBar = hsEl && $(".hs-progress", hsEl);
+  var hsActif = false;
+  function hsSetup() {
+    if (!hsEl) return;
+    hsActif = !reduceMotion && innerWidth > 900;
+    hsEl.classList.toggle("hs--swipe", !hsActif);
+    if (hsActif) {
+      var dist = hsTrack.scrollWidth - innerWidth;
+      hsEl.style.height = (innerHeight + Math.max(0, dist)) + "px";
+    } else { hsEl.style.height = ""; hsTrack.style.transform = ""; }
+  }
+  hsSetup();
+  window.addEventListener("resize", hsSetup);
+  window.addEventListener("load", hsSetup);
+
+  (function tick() {
+    var y = scrollY, dy = y - lastY; lastY = y;
+    vel += (dy - vel) * 0.1;
+    if (dy) dir = dy > 0 ? 1 : -1;
+    if (vm && !reduceMotion) {
+      vmX -= (1.2 + Math.abs(vel) * 0.6) * dir;
+      var w = vm.scrollWidth / 2;
+      if (vmX <= -w) vmX += w; if (vmX > 0) vmX -= w;
+      vm.style.transform = "translate3d(" + vmX.toFixed(1) + "px,0,0) skewX(" + clamp(-vel * 0.25, -10, 10).toFixed(2) + "deg)";
+    }
+    fills.forEach(function (f) {
+      var rc = f.el.getBoundingClientRect();
+      var prog = clamp((innerHeight * 0.85 - rc.top) / (rc.height + innerHeight * 0.35), 0, 1);
+      var n = Math.round(prog * f.mots.length);
+      for (var i = 0; i < f.mots.length; i++) f.mots[i].classList.toggle("on", i < n);
+    });
+    if (hsActif) {
+      var rc = hsEl.getBoundingClientRect();
+      var max = hsEl.offsetHeight - innerHeight;
+      var p = clamp(-rc.top / (max || 1), 0, 1);
+      hsTrack.style.transform = "translate3d(" + (-p * (hsTrack.scrollWidth - innerWidth)).toFixed(1) + "px,0,0)";
+      if (hsBar) hsBar.style.setProperty("--p", p.toFixed(4));
+    }
+    requestAnimationFrame(tick);
+  })();
+
+  /* ── Liste des occasions : aperçu flottant ──────────── */
+  var olist = $("[data-olist]");
+  if (olist && finePointer && !reduceMotion) {
+    var prev = document.createElement("div"); prev.className = "opreview";
+    var pimg = document.createElement("img"); pimg.alt = ""; prev.appendChild(pimg);
+    document.body.appendChild(prev);
+    var pm = { x: 0, y: 0 }, pp = { x: 0, y: 0 }, lastX = 0;
+    olist.addEventListener("pointermove", function (e) { pm.x = e.clientX; pm.y = e.clientY; });
+    $$(".orow", olist).forEach(function (row) {
+      row.addEventListener("pointerenter", function () {
+        pimg.src = row.getAttribute("data-img");
+        var bg = row.getAttribute("data-bg");
+        pimg.style.objectFit = bg === "cover" ? "cover" : "contain";
+        pimg.style.padding = bg === "cover" ? "0" : "14%";
+        prev.style.background = bg === "cover" ? "#000" : bg;
+        prev.classList.add("on");
+      });
+    });
+    olist.addEventListener("pointerleave", function () { prev.classList.remove("on"); });
+    (function suivre() {
+      pp.x += (pm.x - pp.x) * 0.12; pp.y += (pm.y - pp.y) * 0.12;
+      var rot = clamp((pp.x - lastX) * 0.4, -12, 12); lastX = pp.x;
+      prev.style.left = pp.x + "px"; prev.style.top = pp.y + "px";
+      prev.style.rotate = rot.toFixed(2) + "deg";
+      requestAnimationFrame(suivre);
+    })();
+  }
+
+  /* ── Confettis : secouer le téléphone, bouton « Célébrer », succès ── */
+  function celebrer() {
+    if (reduceMotion) return;
+    buzz([20, 40, 20]);
+    var c = document.createElement("canvas"); c.className = "confetti";
+    document.body.appendChild(c);
+    var g = c.getContext("2d"), dp = Math.min(devicePixelRatio || 1, 2);
+    c.width = innerWidth * dp; c.height = innerHeight * dp; g.scale(dp, dp);
+    var couleurs = ["#ffffff", "#b8924a", "#e9d6a6", "#8a8a8a", "#111111"];
+    var bits = [];
+    for (var i = 0; i < 180; i++) bits.push({
+      x: innerWidth / 2 + (Math.random() - 0.5) * 120, y: innerHeight * 0.55,
+      vx: (Math.random() - 0.5) * 18, vy: -Math.random() * 20 - 6,
+      w: 5 + Math.random() * 7, h: 8 + Math.random() * 12, r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.3,
+      c: couleurs[i % couleurs.length]
+    });
+    var debut = performance.now();
+    (function anim(now) {
+      var age = now - debut;
+      g.clearRect(0, 0, innerWidth, innerHeight);
+      bits.forEach(function (b) {
+        b.vy += 0.45; b.vx *= 0.99; b.x += b.vx; b.y += b.vy; b.r += b.vr;
+        g.save(); g.translate(b.x, b.y); g.rotate(b.r); g.scale(1, Math.cos(b.r * 2));
+        g.globalAlpha = clamp(1 - (age - 2200) / 800, 0, 1);
+        g.fillStyle = b.c; g.fillRect(-b.w / 2, -b.h / 2, b.w, b.h); g.restore();
+      });
+      if (age < 3000) requestAnimationFrame(anim); else c.remove();
+    })(debut);
+  }
+  window.exodusCelebrate = celebrer;
+  shakeHandlers.push(celebrer);
+  $$("[data-celebrate]").forEach(function (b) { b.addEventListener("click", celebrer); });
 
   /* ── Compositeur de parfum ─────────────────────────── */
   var composer = $("[data-composer]");
@@ -293,6 +618,7 @@
         $(".devis-steps", form).hidden = true;
         var ok = $(".success", form);
         ok.hidden = false;
+        celebrer();
         $("[data-success-name]", ok).textContent = d.nom.split(" ")[0];
         form.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
       }).catch(function (err) {
@@ -334,6 +660,7 @@
         $(".form-body", f).hidden = true;
         var ok = $(".success", f);
         ok.hidden = false;
+        celebrer();
         var n = $("[data-success-name]", ok);
         if (n) n.textContent = (d.nom || "").split(" ")[0];
         f.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
@@ -348,62 +675,4 @@
       });
     });
   });
-  /* ── Logo animé : suit le défilement, la souris et l'inclinaison du téléphone ── */
-  var logoBox = $("[data-logo-motion]");
-  if (logoBox && !reduceMotion) {
-    var float = $(".logo-float", logoBox);
-    var cible = { x: 0, y: 0 }, pos = { x: 0, y: 0 }, anime = false;
-    var borne = function (v) { return Math.max(-1, Math.min(1, v)); };
-    function boucle() {
-      pos.x += (cible.x - pos.x) * 0.08;
-      pos.y += (cible.y - pos.y) * 0.08;
-      var r = logoBox.getBoundingClientRect();
-      var defile = Math.max(0, -r.top + 120);            // pixels défilés depuis le haut du logo
-      float.style.setProperty("--px", pos.x.toFixed(4));
-      float.style.setProperty("--py", pos.y.toFixed(4));
-      float.style.setProperty("--sy", (defile * 0.35).toFixed(1));
-      float.style.setProperty("--ss", Math.min(defile / 2400, 0.12).toFixed(4));
-      if (Math.abs(cible.x - pos.x) > 0.001 || Math.abs(cible.y - pos.y) > 0.001 || anime) requestAnimationFrame(boucle);
-      else enCours = false;
-    }
-    var enCours = false;
-    function relancer() { if (!enCours) { enCours = true; requestAnimationFrame(boucle); } }
-
-    // Souris (ordinateur)
-    window.addEventListener("pointermove", function (e) {
-      if (e.pointerType !== "mouse") return;
-      cible.x = borne((e.clientX / innerWidth - 0.5) * 2);
-      cible.y = borne((e.clientY / innerHeight - 0.5) * 2);
-      relancer();
-    }, { passive: true });
-    document.addEventListener("mouseleave", function () { cible.x = 0; cible.y = 0; relancer(); });
-
-    // Défilement (téléphone et ordinateur)
-    window.addEventListener("scroll", relancer, { passive: true });
-
-    // Inclinaison du téléphone (gyroscope)
-    var base = null;
-    function orientation(e) {
-      if (e.beta == null || e.gamma == null) return;
-      if (!base) base = { b: e.beta, g: e.gamma };       // position de départ = neutre
-      cible.x = borne((e.gamma - base.g) / 25);
-      cible.y = borne((e.beta - base.b) / 25);
-      relancer();
-    }
-    if (window.DeviceOrientationEvent) {
-      if (typeof DeviceOrientationEvent.requestPermission === "function") {
-        // iPhone : l'autorisation doit être demandée lors d'un premier toucher
-        var demander = function () {
-          DeviceOrientationEvent.requestPermission().then(function (etat) {
-            if (etat === "granted") window.addEventListener("deviceorientation", orientation);
-          }).catch(function () {});
-          window.removeEventListener("touchend", demander);
-        };
-        window.addEventListener("touchend", demander, { once: true });
-      } else {
-        window.addEventListener("deviceorientation", orientation);
-      }
-    }
-    relancer();
-  }
 })();

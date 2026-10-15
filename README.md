@@ -33,7 +33,10 @@ Sans clé Resend, les demandes de devis s'affichent dans la console (simulation)
 - **Textes des pages** : `src/pages/*.html`
 - **Menu et pied de page** (communs à toutes les pages) : `src/partials/`
 - **Couleurs, typographies, mise en page** : `public/assets/exodus.css`
-- **Interactions** (menu, parfum, formulaire) : `public/assets/exodus.js`
+  (noir & blanc éditorial, or en touche rare ; polices Anton, Instrument Serif, Inter Tight)
+- **Interactions** : `public/assets/exodus.js` — intro, rideau entre les pages, logo en
+  particules (souris, doigt, gyroscope, défilement), curseur, boutons magnétiques,
+  services horizontaux, aperçus flottants, confettis (secouer le téléphone), formulaires
 - **Logos** : `public/assets/logos/` (versions or, noir et ivoire sur fond transparent).
   Pour remplacer un logo, gardez le même nom de fichier. Idéalement, exportez-les
   depuis Canva en PNG à fond transparent.
