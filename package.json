@@ -1,0 +1,12 @@
+{
+  "name": "exodusevents",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site web d'Exodus Events Agency — événementiel de luxe à Moncton (NB).",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs && node scripts/dev.mjs"
+  },
+  "engines": { "node": ">=18" }
+}
