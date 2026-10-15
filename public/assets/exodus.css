@@ -958,3 +958,16 @@ a.logo-card:hover .meta b { color: var(--gold-light); }
 .admin-card small { color: var(--fg-faint); font-size: 12px; letter-spacing: 0.08em; }
 .admin-card h3 { font-family: var(--playfair); font-weight: 400; font-size: 1.3rem; }
 .admin-msg { white-space: pre-wrap; color: var(--fg-muted); border-left: 1px solid var(--line); padding-left: 14px; }
+
+/* ── Notre promesse ────────────────────────────────────── */
+.promise { list-style: none; counter-reset: p; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; width: 100%; max-width: 900px; margin: 10px 0; border-block: 1px solid var(--line); }
+.promise li { counter-increment: p; padding: 26px 22px; display: grid; gap: 8px; align-content: start; text-align: center; }
+.promise li + li { border-left: 1px solid var(--line); }
+.promise li::before { content: counter(p, upper-roman) "."; font-family: var(--playfair); font-style: italic; font-size: 1.8rem; color: var(--gold); line-height: 1; }
+.promise b { font-family: var(--cinzel); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.95rem; }
+.promise span { color: var(--fg-muted); font-size: 0.95rem; }
+.promise-note { font-family: var(--playfair); font-style: italic; color: var(--gold-light); font-size: 1.15rem; max-width: 46ch; }
+@media (max-width: 760px) {
+  .promise { grid-template-columns: 1fr; }
+  .promise li + li { border-left: 0; border-top: 1px solid var(--line); }
+}

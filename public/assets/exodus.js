@@ -299,11 +299,11 @@
         var corps = "Type : " + d.typeLabel + "\nServices : " + d.services.join(", ") + "\nDate : " + (d.date || "à définir") +
           "\nInvités : " + d.invites + "\nLieu : " + (d.lieu || "à définir") + "\nBudget : " + (d.budget || "à discuter") +
           "\n\n" + d.message + "\n\n" + d.nom + "\n" + d.telephone;
-        var mail = "mailto:info@exodusevents.org?subject=" + encodeURIComponent("Demande de devis — " + d.typeLabel) + "&body=" + encodeURIComponent(corps);
+        var mail = "mailto:info@exodusevents.org?subject=" + encodeURIComponent("Demande de consultation — " + d.typeLabel) + "&body=" + encodeURIComponent(corps);
         errBox.innerHTML = escapeHtml(err.message || "L'envoi n'a pas abouti.") +
           " Vous pouvez aussi <a href=\"" + mail + "\">nous écrire directement</a> ou appeler le (506) 588-9463.";
         submit.disabled = false;
-        submit.querySelector("span").textContent = "Envoyer ma demande";
+        submit.querySelector("span").textContent = "Réserver ma consultation";
       });
     });
     show(0);

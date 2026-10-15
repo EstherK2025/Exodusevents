@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Demander un devis — Exodus Events Agency</title>
-<meta name="description" content="Parlez-nous de votre événement en deux minutes : type d'événement, services, date, invités. Exodus Events vous répond avec une proposition sur mesure.">
+<title>Consultation gratuite — Exodus Events Agency</title>
+<meta name="description" content="Réservez votre consultation gratuite : Exodus Events crée le dossier de vision complet de votre événement, modifiable à volonté, sans contrat ni paiement tant que vous n'êtes pas conquis.">
 <meta name="theme-color" content="#0c0c0c">
 <meta name="robots" content="index, follow">
 <link rel="icon" href="/assets/favicon-48.png" type="image/png">
@@ -12,8 +12,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_CA">
 <meta property="og:site_name" content="Exodus Events Agency">
-<meta property="og:title" content="Demander un devis — Exodus Events Agency">
-<meta property="og:description" content="Parlez-nous de votre événement en deux minutes : type d'événement, services, date, invités. Exodus Events vous répond avec une proposition sur mesure.">
+<meta property="og:title" content="Consultation gratuite — Exodus Events Agency">
+<meta property="og:description" content="Réservez votre consultation gratuite : Exodus Events crée le dossier de vision complet de votre événement, modifiable à volonté, sans contrat ni paiement tant que vous n'êtes pas conquis.">
 <meta property="og:image" content="https://exodusevents.org/assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -35,7 +35,7 @@
   "telephone": "+1-506-588-9463",
   "foundingDate": "2026",
   "address": { "@type": "PostalAddress", "addressLocality": "Moncton", "addressRegion": "NB", "addressCountry": "CA" },
-  "areaServed": "Nouveau-Brunswick",
+  "areaServed": ["Nouveau-Brunswick", "Canada"],
   "sameAs": ["https://www.instagram.com/exodusevents__/"]
 }
 </script>
@@ -55,7 +55,7 @@
       <a href="/digital">Digital</a>
       <a href="/partenaires">Partenaires</a>
       <a href="/a-propos">La Maison</a>
-      <a class="btn" href="/devis">Demander un devis</a>
+      <a class="btn" href="/devis">Consultation gratuite</a>
     </nav>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-mobile" aria-label="Ouvrir le menu"><span></span><span></span></button>
   </div>
@@ -68,7 +68,7 @@
     <a href="/digital"><small>04</small>Digital</a>
     <a href="/partenaires"><small>05</small>Partenaires</a>
     <a href="/a-propos"><small>06</small>La Maison</a>
-    <a href="/devis" aria-current="page"><small>07</small>Devis</a>
+    <a href="/devis" aria-current="page"><small>07</small>Consultation</a>
   </nav>
   <div class="menu-foot">
     <a href="mailto:info@exodusevents.org">info@exodusevents.org</a>
@@ -79,9 +79,9 @@
 <main id="contenu">
 <section class="page-hero" style="padding-bottom:clamp(40px,6vw,70px)">
   <div class="wrap">
-    <span class="eyebrow reveal">Demande de devis</span>
+    <span class="eyebrow reveal">Consultation gratuite</span>
     <h1 class="display reveal">Racontez-nous <span class="serif-it gilded">votre rêve.</span></h1>
-    <p class="lead reveal">Quatre questions, environ deux minutes. Nous revenons vers vous personnellement avec une proposition sur mesure.</p>
+    <p class="lead reveal">Quatre questions, environ deux minutes. Nous vous recontactons pour votre consultation, puis nous créons gratuitement le dossier de vision de votre événement. Aucun contrat, aucun paiement tant que vous n'êtes pas conquis.</p>
   </div>
 </section>
 
@@ -173,7 +173,7 @@
         <div class="form-nav">
           <button type="button" class="btn btn--ghost" data-prev hidden>← Retour</button>
           <button type="button" class="btn" data-next style="margin-left:auto">Continuer <span class="arrow">→</span></button>
-          <button type="submit" class="btn" data-submit hidden style="margin-left:auto"><span>Envoyer ma demande</span> <span class="arrow">→</span></button>
+          <button type="submit" class="btn" data-submit hidden style="margin-left:auto"><span>Réserver ma consultation</span> <span class="arrow">→</span></button>
         </div>
       </div>
 
@@ -183,9 +183,9 @@
           <circle cx="60" cy="60" r="48" fill="none" stroke="#b8965a" stroke-width=".6" stroke-dasharray="2 3"/>
           <path d="m40 61 13 13 27-28" fill="none" stroke="#d4af6e" stroke-width="2"/>
         </svg>
-        <span class="eyebrow eyebrow--center">Demande envoyée</span>
+        <span class="eyebrow eyebrow--center">Demande reçue</span>
         <h2 class="h2">Merci, <span class="serif-it gilded" data-success-name></span>.</h2>
-        <p class="lead center">Votre rêve est entre de bonnes mains. Nous revenons vers vous très bientôt avec une proposition sur mesure.</p>
+        <p class="lead center">Votre rêve est entre de bonnes mains. Nous vous contactons très bientôt pour fixer votre consultation gratuite, puis nous préparons le dossier de vision de votre événement.</p>
         <div class="btn-row" style="justify-content:center">
           <a class="btn" href="/experiences#parfum">Composer un parfum en attendant</a>
           <a class="btn btn--ghost" href="https://www.instagram.com/exodusevents__/" target="_blank" rel="noopener">Suivre @exodusevents__</a>
@@ -202,9 +202,13 @@
         <div class="contact-line"><small>Basés à</small><span>Moncton, Nouveau-Brunswick</span></div>
       </div>
       <div class="aside-card reveal" style="--d:.08s;background:var(--noir-2)">
-        <span class="eyebrow">Offre de lancement</span>
-        <p class="quote" style="font-size:1.3rem">Nous vous accompagnons dans votre rêve <span class="gilded">gratuitement.</span></p>
-        <p class="muted" style="font-size:.95rem">Pour notre phase de lancement. Parlez-nous de votre projet pour en connaître les détails.</p>
+        <span class="eyebrow">Notre promesse</span>
+        <ul class="ticks">
+          <li>Consultation 100 % gratuite</li>
+          <li>Dossier de vision complet, offert</li>
+          <li>Modifications libres et illimitées</li>
+          <li>Aucun contrat ni paiement avant votre accord</li>
+        </ul>
       </div>
     </aside>
   </div>
@@ -262,7 +266,7 @@
           <li><a href="mailto:info@exodusevents.org">info@exodusevents.org</a></li>
           <li><a href="tel:+15065889463">(506) 588-9463</a></li>
           <li><span class="muted">Moncton, Nouveau-Brunswick</span></li>
-          <li><a href="/devis">Demander un devis →</a></li>
+          <li><a href="/devis">Consultation gratuite →</a></li>
         </ul>
       </div>
     </div>

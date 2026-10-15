@@ -51,8 +51,8 @@ export default async function handler(req, res) {
   if (id) lignes.unshift(["N° de demande", `D-${id}`]);
   return envoyer(res, {
     sauvegarde: id != null,
-    sujet: `Demande de devis — ${d.type} — ${d.nom}`,
-    html: gabarit("NOUVELLE DEMANDE DE DEVIS", `${d.type} — ${d.nom}`, lignes, d.message),
+    sujet: `Demande de consultation — ${d.type} — ${d.nom}`,
+    html: gabarit("NOUVELLE DEMANDE DE CONSULTATION", `${d.type} — ${d.nom}`, lignes, d.message),
     replyTo: d.courriel,
     lignes,
     message: d.message,
