@@ -167,9 +167,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .site-header .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.brand-mark { width: 38px; height: 38px; flex: none; }
-.brand-word { font-family: var(--cinzel); font-weight: 700; font-size: 15px; letter-spacing: 0.28em; white-space: nowrap; }
-.brand-word span { color: var(--gold); font-weight: 400; margin-left: 0.25em; }
+.brand-mark { height: 44px; width: auto; flex: none; }
+.brand-word { height: 20px; width: auto; }
+.footer-brand .brand-mark { height: 64px; }
+.footer-brand .brand-word { height: 22px; }
 .nav { display: flex; align-items: center; gap: 34px; }
 .nav a:not(.btn) {
   font-family: var(--cinzel); font-size: 11.5px; font-weight: 600; letter-spacing: 0.2em;
@@ -282,6 +283,39 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .page-hero .wrap { display: grid; gap: 26px; position: relative; }
 .page-hero .display { font-size: clamp(2.3rem, 6.4vw, 5rem); }
 .page-hero .hero-watermark { font-size: clamp(120px, 22vw, 320px); bottom: -0.25em; }
+
+.hero-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(32px, 5vw, 80px); align-items: center; position: relative; }
+.hero-grid .hero-inner { order: -1; }
+.hero-grid .display { font-size: clamp(2.3rem, 5.4vw, 4.8rem); }
+.hero-logo { position: relative; isolation: isolate; }
+.hero-logo::before {
+  content: ""; position: absolute; inset: -18% -8%; z-index: -1;
+  background: radial-gradient(closest-side, rgba(184, 150, 90, 0.2), transparent);
+}
+.hero-logo img { width: 100%; height: auto; animation: logo-in 1.8s var(--ease) both; }
+@keyframes logo-in { from { opacity: 0; transform: scale(0.96); filter: blur(6px); } }
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+  .hero-grid .hero-inner { order: 0; }
+  .hero-logo { max-width: 520px; }
+}
+
+.offer-seal { width: clamp(96px, 12vw, 130px); height: auto; animation: spin 60s linear infinite; opacity: 0.95; }
+
+/* ── Identité visuelle (galerie de logos) ─────────────── */
+.logo-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 900px) { .logo-gallery { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .logo-gallery { grid-template-columns: 1fr; } }
+.logo-card { border: 1px solid var(--line); display: grid; grid-template-rows: auto 1fr; overflow: hidden; }
+.logo-card .art { position: relative; aspect-ratio: 1; background: var(--noir); overflow: hidden; }
+.logo-card .art--nude { background: var(--nude); }
+.logo-card .art img { position: absolute; inset: 14%; width: 72%; height: 72%; object-fit: contain; transition: transform 1s var(--ease); }
+.logo-card .art--wide img { inset: 6%; width: 88%; height: 88%; }
+.logo-card .art--full img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.logo-card:hover .art img { transform: scale(1.04); }
+.logo-card .meta { padding: 22px 24px; display: grid; gap: 6px; background: var(--noir-2); }
+.logo-card .meta b { font-family: var(--cinzel); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.92rem; }
+.logo-card .meta span { color: var(--fg-muted); font-size: 0.92rem; }
 
 /* ── Bandeau défilant ──────────────────────────────────── */
 .marquee {

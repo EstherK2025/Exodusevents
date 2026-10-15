@@ -31,6 +31,9 @@ Sans clé Resend, les demandes de devis s'affichent dans la console (simulation)
 - **Menu et pied de page** (communs à toutes les pages) : `src/partials/`
 - **Couleurs, typographies, mise en page** : `public/assets/exodus.css`
 - **Interactions** (menu, parfum, formulaire) : `public/assets/exodus.js`
+- **Logos** : `public/assets/logos/` (versions or, noir et ivoire sur fond transparent).
+  Pour remplacer un logo, gardez le même nom de fichier. Idéalement, exportez-les
+  depuis Canva en PNG à fond transparent.
 
 Après une modification dans `src/`, lancer `npm run build` : les fichiers
 `public/*.html` sont régénérés (Vercel le fait aussi automatiquement au déploiement).
