@@ -308,4 +308,44 @@
     });
     show(0);
   }
+  /* ── Formulaires simples (ex. partenaires) ─────────── */
+  $$("form[data-simple-form]").forEach(function (f) {
+    var err = $(".form-error", f), btn = $("button[type=submit]", f);
+    f.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      err.textContent = "";
+      var manquant = $$("[required]", f).filter(function (el) { return !el.value.trim(); })[0];
+      if (manquant) {
+        var lab = f.querySelector('label[for="' + manquant.id + '"]');
+        err.textContent = "Champ requis : " + (lab ? lab.textContent.replace(" *", "") : manquant.name) + ".";
+        manquant.focus();
+        return;
+      }
+      var d = {};
+      $$("input, select, textarea", f).forEach(function (el) { if (el.name) d[el.name] = el.value.trim(); });
+      btn.disabled = true;
+      var txt = btn.querySelector("span"), avant = txt.textContent;
+      txt.textContent = "Envoi…";
+      fetch(f.getAttribute("data-simple-form"), {
+        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(d)
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.error || "Erreur"); return j; });
+      }).then(function () {
+        $(".form-body", f).hidden = true;
+        var ok = $(".success", f);
+        ok.hidden = false;
+        var n = $("[data-success-name]", ok);
+        if (n) n.textContent = (d.nom || "").split(" ")[0];
+        f.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      }).catch(function (e) {
+        var corps = Object.keys(d).filter(function (k) { return k !== "website" && d[k]; })
+          .map(function (k) { return k + " : " + d[k]; }).join("\n");
+        var mail = "mailto:info@exodusevents.org?subject=" + encodeURIComponent("Candidature partenaire — " + (d.entreprise || "")) + "&body=" + encodeURIComponent(corps);
+        err.innerHTML = (e.message || "L'envoi n'a pas abouti.").replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }) +
+          " Vous pouvez aussi <a href=\"" + mail + "\">nous écrire directement</a>.";
+        btn.disabled = false;
+        txt.textContent = avant;
+      });
+    });
+  });
 })();

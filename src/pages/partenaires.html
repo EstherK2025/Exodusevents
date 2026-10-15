@@ -1,0 +1,108 @@
+<!--
+title: Partenaires — Le réseau Exodus Events
+description: Traiteurs, DJ, photographes, fleuristes, pâtissiers, son et lumière : Exodus Events coordonne un réseau de prestataires de confiance. Rejoignez notre réseau de partenaires.
+nav: partenaires
+-->
+<section class="page-hero">
+  <div class="hero-watermark" aria-hidden="true">RÉSEAU</div>
+  <div class="wrap">
+    <span class="eyebrow reveal">Le réseau Exodus</span>
+    <h1 class="display reveal">Un seul interlocuteur,<br><span class="serif-it gilded">les meilleurs talents.</span></h1>
+    <p class="lead reveal">Un grand événement réunit de nombreux métiers. Nous sélectionnons, coordonnons et dirigeons chaque prestataire, pour que vous n'ayez qu'une seule personne à appeler : nous.</p>
+    <div class="btn-row reveal">
+      <a class="btn" href="/devis">Organiser mon événement <span class="arrow">→</span></a>
+      <a class="btn btn--ghost" href="#rejoindre">Devenir partenaire</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal">Tous les métiers de la fête</span>
+      <h2 class="h2 reveal">Nous réunissons <span class="serif-it gilded">chaque savoir-faire.</span></h2>
+      <p class="lead reveal">Ce que nous réalisons nous-mêmes, et ce que nous orchestrons avec nos partenaires : tout est coordonné sous la même direction artistique.</p>
+    </div>
+    <div class="trades">
+      <div class="trade reveal"><b>Traiteurs &amp; chefs</b><span>Buffets, service à l'assiette, cocktails dînatoires, cuisines du monde.</span></div>
+      <div class="trade reveal" style="--d:.04s"><b>Pâtisserie</b><span>Gâteaux de mariage, pièces montées, tables sucrées.</span></div>
+      <div class="trade reveal" style="--d:.08s"><b>Bar &amp; boissons</b><span>Mixologie, mocktails, service de bar.</span></div>
+      <div class="trade reveal"><b>DJ &amp; musiciens</b><span>DJ, orchestres, chorales, musique live.</span></div>
+      <div class="trade reveal" style="--d:.04s"><b>Maîtres de cérémonie</b><span>Animation, MC bilingues, présentateurs.</span></div>
+      <div class="trade reveal" style="--d:.08s"><b>Photo &amp; vidéo</b><span>Photographes, vidéastes, drones, contenu pour réseaux sociaux.</span></div>
+      <div class="trade reveal"><b>Fleuristes</b><span>Bouquets, arches florales, centres de table.</span></div>
+      <div class="trade reveal" style="--d:.04s"><b>Son, lumière &amp; scène</b><span>Sonorisation, éclairage, écrans, scènes.</span></div>
+      <div class="trade reveal" style="--d:.08s"><b>Beauté &amp; style</b><span>Maquillage, coiffure, stylisme.</span></div>
+      <div class="trade reveal"><b>Salles &amp; lieux</b><span>Salles de réception, domaines, espaces extérieurs.</span></div>
+      <div class="trade reveal" style="--d:.04s"><b>Transport</b><span>Voitures de prestige, navettes pour invités.</span></div>
+      <div class="trade reveal" style="--d:.08s"><b>Papeterie &amp; impression</b><span>Faire-part, menus, plans de table, signalétique.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--deep">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal">Pour nos clients</span>
+      <h2 class="h2 reveal">Pourquoi passer <span class="serif-it gilded">par Exodus ?</span></h2>
+    </div>
+    <div class="cards">
+      <div class="card reveal"><h3 class="h3">Un seul contact</h3><p>Fini les dizaines d'appels : nous centralisons les échanges, les horaires et les livraisons.</p></div>
+      <div class="card reveal" style="--d:.06s"><h3 class="h3">Des prestataires choisis</h3><p>Nous travaillons avec des professionnels que nous connaissons et dont nous partageons les standards.</p></div>
+      <div class="card reveal" style="--d:.12s"><h3 class="h3">Une vision cohérente</h3><p>Traiteur, fleurs, musique, lumière : chaque métier sert la même direction artistique.</p></div>
+      <div class="card reveal" style="--d:.18s"><h3 class="h3">Le jour J, maîtrisé</h3><p>Nous coordonnons toutes les équipes sur place, en temps réel.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="rejoindre">
+  <div class="wrap devis">
+    <form class="devis-form" data-simple-form="/api/partenaire" novalidate>
+      <div class="form-body">
+        <span class="eyebrow">Devenir partenaire</span>
+        <h2 class="h2" style="margin:18px 0 10px">Rejoignez <span class="serif-it gilded">le réseau.</span></h2>
+        <p class="muted" style="margin-bottom:34px">Vous êtes traiteur, DJ, fleuriste, photographe ou artisan de la fête ? Présentez-vous : nous construisons notre réseau de partenaires au Nouveau-Brunswick.</p>
+        <div class="fields">
+          <div class="field"><label for="p-entreprise">Entreprise *</label><input id="p-entreprise" name="entreprise" required autocomplete="organization"></div>
+          <div class="field"><label for="p-nom">Votre nom *</label><input id="p-nom" name="nom" required autocomplete="name"></div>
+          <div class="field"><label for="p-domaine">Domaine *</label>
+            <select id="p-domaine" name="domaine" required>
+              <option value="">Choisir…</option>
+              <option>Traiteur / chef</option><option>Pâtisserie</option><option>Bar &amp; boissons</option>
+              <option>DJ / musique</option><option>Maître de cérémonie / animation</option><option>Photo / vidéo</option>
+              <option>Fleuriste</option><option>Son, lumière &amp; scène</option><option>Beauté &amp; style</option>
+              <option>Salle / lieu de réception</option><option>Transport</option><option>Papeterie / impression</option><option>Autre</option>
+            </select>
+          </div>
+          <div class="field"><label for="p-ville">Ville</label><input id="p-ville" name="ville" autocomplete="address-level2"></div>
+          <div class="field"><label for="p-courriel">Courriel *</label><input id="p-courriel" type="email" name="courriel" required autocomplete="email"></div>
+          <div class="field"><label for="p-tel">Téléphone</label><input id="p-tel" type="tel" name="telephone" autocomplete="tel"></div>
+          <div class="field full"><label for="p-lien">Site web ou Instagram</label><input id="p-lien" name="lien" placeholder="https://… ou @…"></div>
+          <div class="field full"><label for="p-message">Présentez votre travail</label><textarea id="p-message" name="message" placeholder="Vos spécialités, votre expérience, vos disponibilités…"></textarea></div>
+          <div class="hp" aria-hidden="true"><label for="p-website">Site</label><input id="p-website" name="website" tabindex="-1" autocomplete="off"></div>
+        </div>
+        <p class="form-error" role="alert"></p>
+        <div class="form-nav"><button type="submit" class="btn"><span>Envoyer ma candidature</span> <span class="arrow">→</span></button></div>
+      </div>
+      <div class="success" hidden>
+        <img class="seal" src="/assets/logos/sceau-or.png" alt="" width="110" height="110" style="height:auto">
+        <span class="eyebrow eyebrow--center">Candidature envoyée</span>
+        <h2 class="h2">Merci, <span class="serif-it gilded" data-success-name></span>.</h2>
+        <p class="lead center">Nous découvrons votre travail et revenons vers vous rapidement.</p>
+      </div>
+    </form>
+    <aside>
+      <div class="aside-card reveal">
+        <span class="eyebrow">Ce que nous recherchons</span>
+        <ul class="ticks">
+          <li>Le goût du travail bien fait</li><li>Ponctualité et fiabilité</li><li>Une présentation soignée</li><li>L'envie de créer des moments uniques</li>
+        </ul>
+      </div>
+      <div class="aside-card reveal" style="--d:.08s;background:var(--noir-2)">
+        <span class="eyebrow">Une question ?</span>
+        <div class="contact-line"><small>Courriel</small><a href="mailto:info@exodusevents.org">info@exodusevents.org</a></div>
+        <div class="contact-line"><small>Téléphone</small><a href="tel:+15065889463">(506) 588-9463</a></div>
+      </div>
+    </aside>
+  </div>
+</section>

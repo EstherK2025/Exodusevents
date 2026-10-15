@@ -11,9 +11,11 @@ pour les demandes de devis. Conçu pour être déployé sur **Vercel**.
 | URL | Contenu |
 | --- | --- |
 | `/` | Accueil : héros, passion, 7 services, expériences signatures, ambiances, processus, offre de lancement |
-| `/services` | Les 7 pôles en détail, types d'événements, FAQ |
+| `/services` | Les 10 pôles par catégorie, un univers (logo) par occasion, FAQ |
 | `/experiences` | Compositeur de parfum interactif (Shemen · Hadassa · Éden · Ruah), 9 saveurs Bubbl' Flow, 360, champagne wall |
-| `/a-propos` | La Maison : vision, mission, valeurs, ambition, univers visuel |
+| `/digital` | Exodus Digital : sites de mariage, sites d'événements, plateformes (billetterie QR…) |
+| `/partenaires` | Le réseau de prestataires + formulaire « Devenir partenaire » |
+| `/a-propos` | La Maison : notre histoire, vision, mission, valeurs, identité visuelle |
 | `/devis` | Formulaire de devis en 4 étapes → courriel à l'agence |
 | `/profil` | Profil d'entreprise (version brochure) |
 
@@ -59,6 +61,8 @@ n'envoie rien : il affiche un message et propose au client d'écrire directement
 
 ```
 api/devis.js          fonction Vercel : POST /api/devis → courriel (Resend)
+api/partenaire.js     fonction Vercel : POST /api/partenaire → courriel
+api/_mail.js          utilitaires communs (envoi Resend, gabarit du courriel)
 public/               site publié (pages générées + assets, robots.txt, sitemap.xml)
 src/pages/            sources des pages (avec bloc title/description/nav en tête)
 src/partials/         <head>, en-tête et pied de page communs

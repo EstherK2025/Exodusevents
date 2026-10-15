@@ -7,6 +7,7 @@ import { readFile, stat } from "node:fs/promises";
 import { join, extname, dirname, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 import devis from "../api/devis.js";
+import partenaire from "../api/partenaire.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "public");
 const port = Number(process.env.PORT) || 3000;
@@ -23,7 +24,8 @@ async function fichier(p) {
 createServer(async (req, res) => {
   const url = new URL(req.url, "http://localhost");
 
-  if (url.pathname === "/api/devis") {
+  const api = { "/api/devis": devis, "/api/partenaire": partenaire }[url.pathname];
+  if (api) {
     let raw = "";
     for await (const c of req) raw += c;
     let body = raw;
@@ -33,7 +35,7 @@ createServer(async (req, res) => {
       setHeader: (k, v) => res.setHeader(k, v),
       json(o) { res.setHeader("Content-Type", "application/json"); res.end(JSON.stringify(o)); },
     };
-    return devis({ method: req.method, body }, r);
+    return api({ method: req.method, body }, r);
   }
 
   const chemin = normalize(decodeURIComponent(url.pathname)).replace(/^(\.\.[/\\])+/, "");
