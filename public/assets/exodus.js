@@ -385,7 +385,7 @@
         var mono = row.getAttribute("data-logo") === "ee";
         prev.classList.toggle("light", mono);
         prev.classList.toggle("main", !mono);
-        pimg.src = mono ? "/assets/logos/ee-noir.png" : "/assets/logos/exodus-script.png";
+        pimg.src = mono ? "/assets/logos/monogramme-noir.png" : "/assets/logos/exodus-script.png";
         pcap.textContent = row.getAttribute("data-cap") || "";
         prev.classList.add("on");
       });
