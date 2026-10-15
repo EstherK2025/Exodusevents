@@ -18,6 +18,7 @@ pour les demandes de devis. Conçu pour être déployé sur **Vercel**.
 | `/a-propos` | La Maison : notre histoire, vision, mission, valeurs, identité visuelle |
 | `/devis` | Formulaire de devis en 4 étapes → courriel à l'agence |
 | `/profil` | Profil d'entreprise (version brochure) |
+| `/admin` | Tableau de bord privé : demandes de devis et partenaires (base Neon) |
 
 ## Démarrer en local
 
@@ -49,13 +50,20 @@ Après une modification dans `src/`, lancer `npm run build` : les fichiers
    - `RESEND_API_KEY` — clé https://resend.com pour envoyer les devis ;
    - `EXODUS_EMAIL_TO` — adresse qui reçoit les demandes (défaut `info@exodusevents.org`) ;
    - `EXODUS_EMAIL_FROM` — expéditeur, ex. `Exodus Events <devis@exodusevents.org>`
-     (le domaine `exodusevents.org` doit être vérifié dans Resend).
+     (le domaine `exodusevents.org` doit être vérifié dans Resend) ;
+   - `DATABASE_URL` — chaîne de connexion de la base **Neon** `exodusevents`
+     (Neon → projet → **Connect**). Le plus simple : dans Vercel, **Storage → Neon**
+     relie la base au projet et crée la variable automatiquement ;
+   - `ADMIN_PASSWORD` — mot de passe du tableau de bord `/admin`.
 3. **Settings → Domains** → ajouter `exodusevents.org` et `www.exodusevents.org`,
    puis créer les enregistrements DNS indiqués par Vercel chez votre registraire.
 
-Tant que `RESEND_API_KEY` n'est pas renseignée en production, le formulaire
-n'envoie rien : il affiche un message et propose au client d'écrire directement
-à info@exodusevents.org ou d'appeler — aucune demande n'est perdue en silence.
+Chaque demande est **enregistrée dans Neon** (tables `demandes_devis` et
+`partenaires`, créées automatiquement) **puis envoyée par courriel**. Si la base
+est connectée, une demande est acceptée même si le courriel échoue : vous la
+retrouvez dans `/admin`. Sans base ni clé Resend en production, le formulaire
+affiche un message et propose au client d'écrire directement — aucune demande
+n'est perdue en silence.
 
 ## Structure
 
@@ -63,6 +71,8 @@ n'envoie rien : il affiche un message et propose au client d'écrire directement
 api/devis.js          fonction Vercel : POST /api/devis → courriel (Resend)
 api/partenaire.js     fonction Vercel : POST /api/partenaire → courriel
 api/_mail.js          utilitaires communs (envoi Resend, gabarit du courriel)
+api/_db.js            base Neon : création des tables, enregistrement, lecture
+api/admin.js          API du tableau de bord (protégée par ADMIN_PASSWORD)
 public/               site publié (pages générées + assets, robots.txt, sitemap.xml)
 src/pages/            sources des pages (avec bloc title/description/nav en tête)
 src/partials/         <head>, en-tête et pied de page communs

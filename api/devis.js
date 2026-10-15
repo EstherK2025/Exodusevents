@@ -1,6 +1,7 @@
 // Demande de devis du site (POST /api/devis) — fonction Vercel.
 // Envoyée par courriel à l'agence (voir api/_mail.js), client en « Répondre à ».
 import { texte, courrielValide, lireCorps, gabarit, envoyer } from "./_mail.js";
+import { enregistrer } from "./_db.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -43,7 +44,13 @@ export default async function handler(req, res) {
     ["Téléphone", d.telephone || "—"],
     ["Contact préféré", d.contact || "—"],
   ];
+  const id = await enregistrer("devis", {
+    type: d.type, services: d.services.join(", "), date_evenement: d.date, lieu: d.lieu, invites: d.invites,
+    budget: d.budget, nom: d.nom, courriel: d.courriel, telephone: d.telephone, contact: d.contact, message: d.message,
+  });
+  if (id) lignes.unshift(["N° de demande", `D-${id}`]);
   return envoyer(res, {
+    sauvegarde: id != null,
     sujet: `Demande de devis — ${d.type} — ${d.nom}`,
     html: gabarit("NOUVELLE DEMANDE DE DEVIS", `${d.type} — ${d.nom}`, lignes, d.message),
     replyTo: d.courriel,

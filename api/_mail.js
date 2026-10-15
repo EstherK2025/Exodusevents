@@ -42,13 +42,18 @@ export function gabarit(surtitre, titre, lignes, message) {
   </div>`;
 }
 
-// Envoie à l'agence. Sans RESEND_API_KEY : simulation en local / aperçu,
+// Envoie à l'agence. « sauvegarde » indique que la demande est déjà
+// enregistrée dans la base : dans ce cas, un échec du courriel ne fait pas
+// échouer la demande (rien n'est perdu).
+// Sans RESEND_API_KEY et sans base : simulation en local / aperçu,
 // erreur 503 en production (le site propose alors d'écrire directement).
-export async function envoyer(res, { sujet, html, replyTo, lignes, message }) {
+export async function envoyer(res, { sujet, html, replyTo, lignes, message, sauvegarde = false }) {
+  const ok = (extra = {}) => res.status(200).json({ ok: true, enregistre: sauvegarde, ...extra });
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
+    if (sauvegarde) return ok();
     if (process.env.VERCEL_ENV === "production") {
-      console.error("RESEND_API_KEY manquante : message non envoyé.", sujet);
+      console.error("Ni RESEND_API_KEY ni base de données : message non transmis.", sujet);
       return res.status(503).json({ error: "L'envoi en ligne n'est pas encore activé." });
     }
     console.log("\n📧 [SIMULATION] (aucune clé Resend configurée)");
@@ -56,7 +61,7 @@ export async function envoyer(res, { sujet, html, replyTo, lignes, message }) {
     console.log("  Objet :", sujet);
     lignes.forEach(([k, v]) => console.log(`  ${k.padEnd(16)}: ${v}`));
     if (message) console.log("  Message         :", message);
-    return res.status(200).json({ ok: true, simulated: true });
+    return ok({ simulated: true });
   }
   try {
     const r = await fetch("https://api.resend.com/emails", {
@@ -66,11 +71,11 @@ export async function envoyer(res, { sujet, html, replyTo, lignes, message }) {
     });
     if (!r.ok) {
       console.error("Resend a refusé l'envoi :", r.status, await r.text());
-      return res.status(502).json({ error: "L'envoi n'a pas abouti." });
+      return sauvegarde ? ok() : res.status(502).json({ error: "L'envoi n'a pas abouti." });
     }
   } catch (e) {
     console.error("Erreur réseau Resend :", e);
-    return res.status(502).json({ error: "L'envoi n'a pas abouti." });
+    return sauvegarde ? ok() : res.status(502).json({ error: "L'envoi n'a pas abouti." });
   }
-  return res.status(200).json({ ok: true });
+  return ok();
 }

@@ -1,5 +1,6 @@
 // Candidature d'un prestataire partenaire (POST /api/partenaire) — fonction Vercel.
 import { texte, courrielValide, lireCorps, gabarit, envoyer } from "./_mail.js";
+import { enregistrer } from "./_db.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -33,7 +34,10 @@ export default async function handler(req, res) {
     ["Téléphone", d.telephone || "—"],
     ["Site / Instagram", d.lien || "—"],
   ];
+  const id = await enregistrer("partenaires", d);
+  if (id) lignes.unshift(["N° de candidature", `P-${id}`]);
   return envoyer(res, {
+    sauvegarde: id != null,
     sujet: `Nouveau partenaire — ${d.domaine} — ${d.entreprise}`,
     html: gabarit("CANDIDATURE PARTENAIRE", `${d.entreprise} — ${d.domaine}`, lignes, d.message),
     replyTo: d.courriel,

@@ -1,0 +1,46 @@
+<!--
+title: Tableau de bord — Exodus Events
+description: Espace privé de gestion des demandes.
+nav: aucune
+header: solid
+robots: noindex, nofollow
+-->
+<section class="section section--tight" style="padding-top:calc(var(--header-h) + 48px)">
+  <div class="wrap">
+    <form id="admin-login" class="aside-card" style="max-width:440px;margin:6vh auto">
+      <span class="eyebrow">Espace privé</span>
+      <h1 class="h2">Tableau <span class="serif-it gilded">de bord.</span></h1>
+      <div class="field"><label for="a-pass">Mot de passe</label><input id="a-pass" type="password" autocomplete="current-password" required></div>
+      <p class="form-error" role="alert"></p>
+      <button class="btn" type="submit"><span>Entrer</span> <span class="arrow">→</span></button>
+    </form>
+
+    <div id="admin-app" hidden>
+      <div class="admin-top">
+        <div>
+          <span class="eyebrow">Tableau de bord</span>
+          <h1 class="h2" style="margin-top:10px">Vos <span class="serif-it gilded">demandes.</span></h1>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn--ghost" type="button" data-csv>Exporter (CSV)</button>
+          <button class="btn btn--ghost" type="button" data-logout>Se déconnecter</button>
+        </div>
+      </div>
+      <div class="admin-tabs" role="tablist">
+        <button type="button" role="tab" data-tab="devis" aria-selected="true">Demandes de devis <b data-count="devis"></b></button>
+        <button type="button" role="tab" data-tab="partenaires" aria-selected="false">Partenaires <b data-count="partenaires"></b></button>
+      </div>
+      <div class="admin-filters">
+        <input type="search" placeholder="Rechercher un nom, un courriel, un service…" data-search aria-label="Rechercher">
+        <select data-filter aria-label="Filtrer par statut">
+          <option value="">Tous les statuts</option>
+          <option value="nouveau">Nouveau</option><option value="en_cours">En cours</option>
+          <option value="traite">Traité</option><option value="archive">Archivé</option>
+        </select>
+      </div>
+      <p class="form-error" data-app-error role="alert"></p>
+      <div class="admin-list" data-list></div>
+    </div>
+  </div>
+</section>
+<script defer src="/assets/admin.js"></script>
