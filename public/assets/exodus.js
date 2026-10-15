@@ -382,9 +382,10 @@
     olist.addEventListener("pointermove", function (e) { pm.x = e.clientX; pm.y = e.clientY; });
     $$(".orow", olist).forEach(function (row) {
       row.addEventListener("pointerenter", function () {
-        var clair = row.hasAttribute("data-light");
-        prev.classList.toggle("light", clair);
-        pimg.src = clair ? "/assets/logos/ee-noir.png" : "/assets/logos/ee-blanc.png";
+        var mono = row.getAttribute("data-logo") === "ee";
+        prev.classList.toggle("light", mono);
+        prev.classList.toggle("main", !mono);
+        pimg.src = mono ? "/assets/logos/ee-noir.png" : "/assets/logos/exodus-script.png";
         pcap.textContent = row.getAttribute("data-cap") || "";
         prev.classList.add("on");
       });
