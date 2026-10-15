@@ -432,6 +432,7 @@
   window.exodusCelebrate = celebrer;
   shakeHandlers.push(celebrer);
   $$("[data-celebrate]").forEach(function (b) { b.addEventListener("click", celebrer); });
+  $$("[data-print]").forEach(function (b) { b.addEventListener("click", function () { window.print(); }); });
 
   /* ── Compositeur de parfum ─────────────────────────── */
   var composer = $("[data-composer]");

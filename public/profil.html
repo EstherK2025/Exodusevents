@@ -1,807 +1,346 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr-CA">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Profil d'entreprise — Exodus Events Agency</title>
+<meta name="description" content="Profil d'entreprise d'Exodus Events Agency, agence événementielle de luxe à Moncton : présentation, vision, services, expériences signatures, processus, identité et contact.">
+<meta name="theme-color" content="#000000">
+<meta name="robots" content="index, follow">
 <link rel="icon" href="/assets/favicon-48.png" type="image/png">
-<title>Exodus Events — Profil d'Entreprise</title>
-<meta name="description" content="Exodus Events Agency — agence événementielle haut de gamme et immersive à Moncton (NB). De la genèse à l'exaucement.">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:site_name" content="Exodus Events Agency">
+<meta property="og:title" content="Profil d'entreprise — Exodus Events Agency">
+<meta property="og:description" content="Profil d'entreprise d'Exodus Events Agency, agence événementielle de luxe à Moncton : présentation, vision, services, expériences signatures, processus, identité et contact.">
+<meta property="og:image" content="https://exodusevents.org/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap">
-
-<style>
-/* === DESIGN SYSTEM — Luxury dark-first === */
-:root {
-  --noir: #0C0C0C;
-  --gold: #B8965A;
-  --gold-light: #D4AF6E;
-  --nude: #F5EFE6;
-  --ivoire: #FAFAF8;
-  --espresso: #2C1A0E;
-  --fg: #FAFAF8;
-  --fg-muted: rgba(250,250,248,0.6);
-  --border: rgba(184,150,90,0.25);
-  --surface: rgba(255,255,255,0.04);
-  color-scheme: dark;
-  --cinzel: 'Cinzel', serif;
-  --playfair: 'Playfair Display', Georgia, serif;
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/exodus.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EventPlanner",
+  "name": "Exodus Events Agency",
+  "logo": "https://exodusevents.org/assets/icon-512.png",
+  "image": "https://exodusevents.org/assets/og.jpg",
+  "slogan": "De la genèse à l'exaucement.",
+  "description": "Agence événementielle de luxe et d'expériences immersives à Moncton, Nouveau-Brunswick.",
+  "email": "info@exodusevents.org",
+  "telephone": "+1-506-588-9463",
+  "foundingDate": "2026",
+  "address": { "@type": "PostalAddress", "addressLocality": "Moncton", "addressRegion": "NB", "addressCountry": "CA" },
+  "areaServed": ["Nouveau-Brunswick", "Canada"],
+  "sameAs": ["https://www.instagram.com/exodusevents__/"]
 }
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --noir: #FAFAF8;
-    --fg: #0C0C0C;
-    --fg-muted: rgba(12,12,12,0.55);
-    --surface: rgba(0,0,0,0.03);
-    --border: rgba(184,150,90,0.3);
-    color-scheme: light;
-  }
-}
-:root[data-theme="light"] {
-  --noir: #FAFAF8; --fg: #0C0C0C;
-  --fg-muted: rgba(12,12,12,0.55);
-  --surface: rgba(0,0,0,0.03);
-  --border: rgba(184,150,90,0.3);
-  color-scheme: light;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--noir);
-  color: var(--fg);
-  font-family: var(--playfair);
-  font-size: 16px;
-  line-height: 1.7;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-
-/* ── TYPOGRAPHY ── */
-.label {
-  font-family: var(--cinzel);
-  font-size: 10px;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-h1 { font-family: var(--cinzel); font-size: clamp(2.2rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.1; text-wrap: balance; }
-h2 { font-family: var(--cinzel); font-size: clamp(1.4rem, 3.5vw, 2.2rem); font-weight: 600; line-height: 1.2; text-wrap: balance; }
-h3 { font-family: var(--cinzel); font-size: 1rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
-.italic { font-style: italic; }
-.gold { color: var(--gold); }
-p { color: var(--fg-muted); }
-
-/* ── SECTIONS ── */
-.section {
-  padding-block: 80px;
-  max-width: 1100px;
-  margin-inline: auto;
-  width: 100%;
-}
-.section-full {
-  padding-block: 80px;
-  width: 100%;
-}
-.section-inner {
-  max-width: 1100px;
-  margin-inline: auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-.divider {
-  width: 60px;
-  height: 1px;
-  background: var(--gold);
-  margin-block: 24px;
-}
-.divider-center { margin-inline: auto; }
-
-/* ── COVER ── */
-.cover {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding-block: 80px;
-  position: relative;
-  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(184,150,90,0.08) 0%, transparent 70%), var(--noir);
-  overflow: hidden;
-}
-.cover::before {
-  content: 'EXODUS';
-  position: absolute;
-  font-family: var(--cinzel);
-  font-size: clamp(120px, 25vw, 260px);
-  font-weight: 700;
-  color: rgba(184,150,90,0.04);
-  letter-spacing: .1em;
-  top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  pointer-events: none;
-  white-space: nowrap;
-}
-.logo-mark {
-  font-family: var(--cinzel);
-  font-size: 11px;
-  letter-spacing: .4em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 32px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.logo-mark::before, .logo-mark::after {
-  content: '';
-  display: block;
-  width: 40px;
-  height: 1px;
-  background: var(--gold);
-  opacity: .5;
-}
-.cover h1 { margin-bottom: 16px; }
-.slogan {
-  font-family: var(--playfair);
-  font-style: italic;
-  font-size: clamp(1rem, 2.5vw, 1.35rem);
-  color: var(--gold-light);
-  margin-bottom: 48px;
-}
-.stats-row {
-  display: flex;
-  gap: 48px;
-  margin-top: 56px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.stat { text-align: center; }
-.stat-num {
-  font-family: var(--cinzel);
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--gold);
-  display: block;
-}
-.stat-label {
-  font-size: 11px;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-}
-.cover-contact {
-  margin-top: 48px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 13px;
-  color: var(--fg-muted);
-  font-family: var(--cinzel);
-  letter-spacing: .08em;
-}
-
-/* ── GRID ── */
-.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
-.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
-
-/* ── CARDS ── */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  padding: 32px;
-}
-.card-gold { border-left: 2px solid var(--gold); }
-
-/* ── SERVICES GRID ── */
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2px;
-  background: var(--border);
-}
-.service-item {
-  background: var(--noir);
-  padding: 32px;
-  transition: background .3s;
-}
-.service-item:hover { background: var(--surface); }
-.service-letter {
-  font-family: var(--cinzel);
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--gold);
-  opacity: .4;
-  margin-bottom: 12px;
-  display: block;
-}
-
-/* ── TIMELINE ── */
-.timeline { position: relative; padding-left: 32px; }
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 8px; top: 8px; bottom: 8px;
-  width: 1px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-}
-.timeline-item { position: relative; padding-bottom: 40px; }
-.timeline-item:last-child { padding-bottom: 0; }
-.timeline-dot {
-  position: absolute;
-  left: -28px;
-  top: 6px;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--gold);
-  border: 2px solid var(--noir);
-}
-.timeline-num {
-  font-family: var(--cinzel);
-  font-size: 10px;
-  letter-spacing: .2em;
-  color: var(--gold);
-  margin-bottom: 6px;
-}
-
-/* ── VISION LONG TERME ── */
-.vision-cols {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1px;
-  background: var(--border);
-}
-.vision-col {
-  background: var(--noir);
-  padding: 40px 32px;
-}
-.vision-period {
-  font-family: var(--cinzel);
-  font-size: 11px;
-  letter-spacing: .3em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 8px;
-}
-.vision-years {
-  font-family: var(--playfair);
-  font-style: italic;
-  font-size: 1.8rem;
-  color: var(--fg);
-  margin-bottom: 24px;
-}
-.vision-col ul { list-style: none; }
-.vision-col ul li {
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: .9rem;
-  color: var(--fg-muted);
-}
-.vision-col ul li::before {
-  content: '— ';
-  color: var(--gold);
-}
-
-/* ── LOGO GRID ── */
-.logo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2px;
-  background: var(--border);
-  margin-top: 40px;
-}
-.logo-item {
-  background: var(--noir);
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.logo-num {
-  font-family: var(--cinzel);
-  font-size: 10px;
-  letter-spacing: .25em;
-  color: var(--gold);
-  opacity: .6;
-}
-
-/* ── PALETTE ── */
-.palette-row {
-  display: flex;
-  gap: 0;
-  height: 80px;
-  border-radius: 2px;
-  overflow: hidden;
-  margin: 32px 0;
-}
-.swatch { flex: 1; position: relative; }
-.swatch-label {
-  position: absolute;
-  bottom: 8px; left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--cinzel);
-  font-size: 9px;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-/* ── PARFUM / BUBBL ── */
-.essence-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2px;
-  background: var(--border);
-  margin-top: 32px;
-}
-.essence-item {
-  background: var(--noir);
-  padding: 28px;
-}
-.essence-icon {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
-}
-
-/* ── CONTACT ── */
-.contact-section {
-  background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(184,150,90,0.1) 0%, transparent 70%);
-  text-align: center;
-  padding-block: 100px;
-}
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 40px;
-  font-family: var(--cinzel);
-  font-size: 13px;
-  letter-spacing: .1em;
-  color: var(--fg-muted);
-}
-.contact-info a { color: var(--gold); text-decoration: none; }
-
-/* ── SEPARATORS ── */
-.sep {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 0;
-}
-
-/* ── PASSION PILLARS ── */
-.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; margin-top: 40px; }
-.pillar { text-align: center; }
-.pillar-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 600px) {
-  .stats-row { gap: 24px; }
-  .section { padding-block: 56px; }
-  .palette-row { height: 56px; }
-  .cover { padding-block: 60px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
-}
-</style>
+</script>
+<script defer src="/assets/exodus.js"></script>
 </head>
 <body>
-
-<!-- ══════════════════════════════════════
-     COVER
-══════════════════════════════════════ -->
-<section class="cover">
-  <div class="logo-mark">MONCTON · NB · EST. 2026</div>
-  <span class="label" style="margin-bottom:20px;">Luxury Event & Experience Agency</span>
-  <h1>Exodus Events<br><span class="italic gold">Agency</span></h1>
-  <p class="slogan">De la genèse à l'exaucement.</p>
-  <p style="max-width:480px;text-align:center;font-size:.95rem;">Nous créons des expériences immersives, élégantes et mémorables — parce que notre seule passion, c'est de <em>rendre les gens heureux.</em></p>
-
-  <div class="stats-row">
-    <div class="stat"><span class="stat-num">7+</span><span class="stat-label">Services</span></div>
-    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Types d'événements</span></div>
-    <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Sur mesure</span></div>
-    <div class="stat"><span class="stat-num">2026</span><span class="stat-label">Fondée</span></div>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Exodus Events — accueil">
+      <img class="brand-mark" src="/assets/logos/monogramme-blanc.png" alt="" width="611" height="1192">
+      <img class="brand-word" src="/assets/logos/wordmark-blanc.png" alt="Exodus Events" width="583" height="106">
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="/services">Services</a>
+      <a href="/experiences">Expériences</a>
+      <a href="/digital">Digital</a>
+      <a href="/partenaires">Partenaires</a>
+      <a href="/a-propos">La Maison</a>
+      <a class="btn" href="/devis">Consultation gratuite</a>
+    </nav>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-mobile" aria-label="Ouvrir le menu"><i>Menu</i><span class="lines"><span></span><span></span></span></button>
   </div>
-
-  <div class="cover-contact">
-    <span>info@exodusevents.org</span>
-    <span>(506) 588-9463</span>
-    <span>@exodusevents__</span>
+</header>
+<div class="mobile-menu" id="menu-mobile" aria-hidden="true">
+  <nav aria-label="Navigation mobile">
+    <a href="/"><small>01</small>Accueil</a>
+    <a href="/services"><small>02</small>Services</a>
+    <a href="/experiences"><small>03</small>Expériences</a>
+    <a href="/digital"><small>04</small>Digital</a>
+    <a href="/partenaires"><small>05</small>Partenaires</a>
+    <a href="/a-propos"><small>06</small>La Maison</a>
+    <a href="/devis"><small>07</small>Consultation</a>
+  </nav>
+  <div class="menu-foot">
+    <a href="mailto:info@exodusevents.org">info@exodusevents.org</a>
+    <a href="tel:+15065889463">(506) 588-9463</a>
+    <a href="https://www.instagram.com/exodusevents__/" target="_blank" rel="noopener">@exodusevents__</a>
   </div>
-</section>
-
-<hr class="sep">
-
-<!-- ══════════════════════════════════════
-     PRÉSENTATION
-══════════════════════════════════════ -->
-<section class="section">
-  <span class="label">01 — Présentation</span>
-  <div class="divider"></div>
-  <h2>Qui sommes-nous ?</h2>
-  <p style="max-width:680px;margin-top:16px;font-size:1.05rem;">Exodus Events est une agence événementielle spécialisée dans la création d'expériences immersives, élégantes et haut de gamme. Nous accompagnons particuliers, entreprises, organisations et institutions dans l'organisation, la décoration et la réalisation d'événements mémorables.</p>
-
-  <div class="divider" style="margin-top:48px;"></div>
-  <h2 class="italic gold" style="font-size:clamp(1.6rem,4vw,2.8rem);max-width:700px;">Tout guidé par une seule passion :</h2>
-  <h2 style="font-size:clamp(1.8rem,5vw,3.2rem);">Rendre les gens heureux.</h2>
-
-  <div class="pillars">
-    <div class="pillar">
-      <span class="pillar-icon">✦</span>
-      <h3 class="gold">Joie</h3>
-      <p style="font-size:.9rem;margin-top:8px;">Chaque événement porte une émotion. Nous la concevons avec intention.</p>
-    </div>
-    <div class="pillar">
-      <span class="pillar-icon">◈</span>
-      <h3 class="gold">Souvenir</h3>
-      <p style="font-size:.9rem;margin-top:8px;">Ce qui reste après la fête, c'est ce que nous créons vraiment.</p>
-    </div>
-    <div class="pillar">
-      <span class="pillar-icon">❋</span>
-      <h3 class="gold">Connexion</h3>
-      <p style="font-size:.9rem;margin-top:8px;">Réunir des gens autour d'une expérience partagée est notre art.</p>
+</div>
+<main id="contenu">
+<section class="hero profil-cover">
+  <div class="wrap hero-top"><span>Profil d'entreprise</span><span>Édition 2026</span></div>
+  <div class="hero-stage">
+    <img class="profil-logo reveal" src="/assets/logos/exodus-script.png" alt="Exodus Events Agency" width="1366" height="628">
+  </div>
+  <div class="wrap hero-bottom">
+    <h1 class="display hero-title reveal">Nous créons<br><em>l'exception.</em></h1>
+    <div class="hero-side reveal" style="--d:.2s">
+      <p>Agence événementielle de luxe &amp; d'expériences immersives. Moncton, Canada. <em class="serif-it">De la genèse à l'exaucement.</em></p>
+      <button class="btn" type="button" data-print>Enregistrer en PDF <span class="arrow">→</span></button>
     </div>
   </div>
 </section>
 
-<hr class="sep">
-
-<!-- ══════════════════════════════════════
-     VISION MISSION VALEURS
-══════════════════════════════════════ -->
-<section class="section">
-  <span class="label">02 — Vision · Mission · Valeurs</span>
-  <div class="divider"></div>
-
-  <div class="grid-2" style="margin-bottom:48px;">
-    <div class="card card-gold">
-      <h3 class="gold" style="margin-bottom:16px;">Notre Vision</h3>
-      <p>Devenir une référence canadienne et internationale dans l'univers de l'événementiel premium et immersif — reconnue pour son élégance, sa créativité et ses expériences innovantes.</p>
-    </div>
-    <div class="card card-gold">
-      <h3 class="gold" style="margin-bottom:16px;">Notre Mission</h3>
-      <p>Créer des événements qui marquent les esprits grâce à une organisation structurée, une direction artistique raffinée, des concepts modernes et une expérience client exceptionnelle.</p>
-    </div>
-  </div>
-
-  <h3 style="margin-bottom:24px;">Nos Valeurs</h3>
-  <div class="grid-3">
-    <div style="padding:16px 0;border-bottom:1px solid var(--border);">
-      <span class="label">Excellence</span>
-      <p style="margin-top:8px;font-size:.9rem;">Chaque détail compte.</p>
-    </div>
-    <div style="padding:16px 0;border-bottom:1px solid var(--border);">
-      <span class="label">Créativité</span>
-      <p style="margin-top:8px;font-size:.9rem;">Chaque projet est conçu de façon unique.</p>
-    </div>
-    <div style="padding:16px 0;border-bottom:1px solid var(--border);">
-      <span class="label">Professionnalisme</span>
-      <p style="margin-top:8px;font-size:.9rem;">Une expérience structurée et premium.</p>
-    </div>
-    <div style="padding:16px 0;border-bottom:1px solid var(--border);">
-      <span class="label">Innovation</span>
-      <p style="margin-top:8px;font-size:.9rem;">Concepts modernes et immersifs.</p>
-    </div>
-    <div style="padding:16px 0;border-bottom:1px solid var(--border);">
-      <span class="label">Expérience Client</span>
-      <p style="margin-top:8px;font-size:.9rem;">Le client, au centre de chaque projet.</p>
+<section class="section section--ivory section--tight">
+  <div class="wrap">
+    <div class="stats">
+      <div><b>13</b><span>pôles d'excellence</span></div>
+      <div><b>∞</b><span>types d'événements</span></div>
+      <div><b>100 %</b><span>sur mesure</span></div>
+      <div><b>0 $</b><span>consultation &amp; dossier de vision</span></div>
     </div>
   </div>
 </section>
 
-<hr class="sep">
-
-<!-- ══════════════════════════════════════
-     IDENTITÉ VISUELLE — LOGOS
-══════════════════════════════════════ -->
-<section class="section">
-  <span class="label">03 — Identité visuelle</span>
-  <div class="divider"></div>
-  <h2>Logo & Monogramme</h2>
-  <p style="max-width:600px;margin-top:16px;">Comme les grandes maisons : une seule signature, et son monogramme pour les petits formats.</p>
-
-  <div class="logo-grid">
-    <div class="logo-item">
-      <span class="logo-num">01</span>
-      <img src="/assets/logos/exodus-script.png" alt="Logo principal Exodus Events Agency" style="width:100%;max-width:360px;margin:12px 0">
-      <h3>Le logo principal</h3>
-      <p style="font-size:.85rem;margin-top:8px;">Calligraphie « Exodus » et bloc doré « Events ». Notre signature, partout.</p>
+<section class="section profil-sec">
+  <div class="wrap split split--top">
+    <div class="section-head" style="margin:0">
+      <span class="eyebrow">01 — Présentation</span>
+      <h2 class="h2">Qui <em>sommes-nous ?</em></h2>
     </div>
-    <div class="logo-item">
-      <span class="logo-num">02</span>
-      <img src="/assets/logos/monogramme-blanc.png" alt="Monogramme Exodus Events" style="height:160px;width:auto;margin:12px 0">
-      <h3>Le monogramme</h3>
-      <p style="font-size:.85rem;margin-top:8px;">L'arche et ses deux « E » entrelacés : en-tête, cachet, petits formats.</p>
+    <div style="display:grid;gap:22px">
+      <p class="lead">Exodus Events est une agence événementielle spécialisée dans la création d'expériences immersives, élégantes et haut de gamme.</p>
+      <p class="muted">Nous accompagnons particuliers, entreprises, organisations et institutions dans l'organisation, la décoration et la réalisation d'événements mémorables, en coordonnant un réseau de partenaires de confiance. Mariage traditionnel ou moderne, gala, célébration religieuse ou culturelle, festival : chaque histoire et chaque tradition ont leur place chez nous.</p>
+      <p class="quote">Notre seule passion : rendre les gens heureux.</p>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:clamp(48px,7vw,90px)">
+    <div class="pillars">
+      <div class="pillar"><span class="num">01</span><h3 class="h3">Joie</h3><p class="muted">Chaque événement porte une émotion. Nous la concevons avec intention.</p></div>
+      <div class="pillar"><span class="num">02</span><h3 class="h3">Souvenir</h3><p class="muted">Ce qui reste après la fête, c'est ce que nous créons vraiment.</p></div>
+      <div class="pillar"><span class="num">03</span><h3 class="h3">Connexion</h3><p class="muted">Réunir des gens autour d'une expérience partagée, c'est notre art.</p></div>
     </div>
   </div>
 </section>
 
-<hr class="sep">
-
-<!-- ══════════════════════════════════════
-     PALETTE & TYPOGRAPHIES
-══════════════════════════════════════ -->
-<section class="section">
-  <span class="label">04 — Couleurs & Typographies</span>
-  <div class="divider"></div>
-  <h2>L'Univers Visuel</h2>
-
-  <div class="palette-row" style="margin-top:40px;">
-    <div class="swatch" style="background:#0C0C0C;">
-      <span class="swatch-label" style="color:rgba(255,255,255,.5);font-size:8px;">NOIR ABSOLU</span>
+<section class="section section--ivory profil-sec">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">02 — Vision · Mission · Valeurs</span>
+      <h2 class="h2">Ce qui <em>nous guide.</em></h2>
     </div>
-    <div class="swatch" style="background:#B8965A;">
-      <span class="swatch-label" style="color:#0C0C0C;font-size:8px;">CHAMPAGNE GOLD</span>
+    <div class="split split--top" style="margin-bottom:clamp(48px,7vw,80px)">
+      <div style="display:grid;gap:14px"><span class="eyebrow">Notre vision</span><p class="quote">Devenir une référence canadienne et internationale de l'événementiel premium et immersif.</p></div>
+      <div style="display:grid;gap:14px"><span class="eyebrow">Notre mission</span><p class="quote">Créer des événements qui marquent les esprits.</p><p class="muted">Grâce à une organisation structurée, une direction artistique raffinée, des concepts modernes et une expérience client exceptionnelle.</p></div>
     </div>
-    <div class="swatch" style="background:#D4AF6E;">
-      <span class="swatch-label" style="color:#0C0C0C;font-size:8px;">OR CLAIR</span>
-    </div>
-    <div class="swatch" style="background:#F5EFE6;">
-      <span class="swatch-label" style="color:#2C1A0E;font-size:8px;">NUDE CRÈME</span>
-    </div>
-    <div class="swatch" style="background:#FAFAF8;">
-      <span class="swatch-label" style="color:#2C1A0E;font-size:8px;">BLANC IVOIRE</span>
-    </div>
-    <div class="swatch" style="background:#2C1A0E;">
-      <span class="swatch-label" style="color:rgba(255,255,255,.5);font-size:8px;">BRUN ESPRESSO</span>
-    </div>
-  </div>
-
-  <div class="grid-2" style="margin-top:48px;align-items:start;">
-    <div class="card">
-      <h3 class="gold" style="margin-bottom:12px;">Cinzel</h3>
-      <div style="font-family:'Cinzel',serif;font-size:2.5rem;font-weight:700;line-height:1.1;color:var(--fg);">EXODUS<br>EVENTS</div>
-      <p style="font-size:.85rem;margin-top:12px;">Titres · Branding · Logotype · Labels<br>Élégance classique, autorité intemporelle.</p>
-    </div>
-    <div class="card">
-      <h3 class="gold" style="margin-bottom:12px;">Playfair Display</h3>
-      <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-style:italic;line-height:1.2;color:var(--fg);">De la genèse<br>à l'exaucement.</div>
-      <p style="font-size:.85rem;margin-top:12px;">Éditorial · Slogans · Corps de texte<br>Chaleur, profondeur, caractère.</p>
+    <div class="values">
+      <div class="value"><b>Excellence</b><span>Chaque détail compte.</span></div>
+      <div class="value"><b>Créativité</b><span>Chaque projet est unique.</span></div>
+      <div class="value"><b>Professionnalisme</b><span>Une expérience structurée et premium.</span></div>
+      <div class="value"><b>Innovation</b><span>Des concepts modernes et immersifs.</span></div>
+      <div class="value"><b>Expérience client</b><span>Vous, au centre de chaque projet.</span></div>
     </div>
   </div>
 </section>
 
-<hr class="sep">
-
-<!-- ══════════════════════════════════════
-     7 SERVICES
-══════════════════════════════════════ -->
-<section class="section-full">
-  <div class="section-inner">
-    <span class="label">05 — Services</span>
-    <div class="divider"></div>
-    <h2>Nos 7 Pôles d'Excellence</h2>
-    <p style="max-width:600px;margin-top:12px;">De l'organisation complète aux expériences immersives — Exodus Events couvre chaque dimension de votre événement.</p>
-  </div>
-
-  <div class="services-grid" style="margin-top:40px;">
-    <div class="service-item">
-      <span class="service-letter">A</span>
-      <h3>Organisation d'Événements</h3>
-      <p style="font-size:.85rem;margin-top:10px;">Mariages · Anniversaires · Galas · Corporate · Festivals · Religieux · Conférences · Graduations · Événements privés</p>
-    </div>
-    <div class="service-item">
-      <span class="service-letter">B</span>
-      <h3>Décoration Événementielle</h3>
-      <p style="font-size:.85rem;margin-top:10px;">Arches · Backdrops · Centres de table · Floral · LED · Ballons · Panneaux · Installations immersives</p>
-    </div>
-    <div class="service-item">
-      <span class="service-letter">C</span>
-      <h3>Luxury Event Rentals</h3>
-      <p style="font-size:.85rem;margin-top:10px;">Mobilier premium · Vaisselle or / noir mat / rose gold · Verrerie luxe · Nappes · Structures</p>
-    </div>
-    <div class="service-item">
-      <span class="service-letter">D</span>
-      <h3>Photo Experience</h3>
-      <p style="font-size:.85rem;margin-top:10px;">Booth Cube · 360 Booth · GIF · Vidéos 360 · Partage instantané · Branding personnalisé</p>
-    </div>
-    <div class="service-item">
-      <span class="service-letter">E</span>
-      <h3>Bar à Parfum</h3>
-      <p style="font-size:.85rem;margin-top:10px;">Exodus Perfume Experience — 4 essences : Shemen · Hadassa · Éden · Ruah. Parfum solide & liquide.</p>
-    </div>
-    <div class="service-item">
-      <span class="service-letter">F</span>
-      <h3>Bubbl' Flow — Bubble Tea</h3>
-      <p style="font-size:.85rem;margin-top:10px;">9 saveurs signatures : Bissap Flow · Mangue Sun · Gnamakou Cream · Coco Chill · Passion Vibe · Grenade Pop · Baobab Breeze · Tamarin Zing · Cocota Mood</p>
-    </div>
-    <div class="service-item">
-      <span class="service-letter">G</span>
-      <h3>Champagne Wall & Installations</h3>
-      <p style="font-size:.85rem;margin-top:10px;">Champagne wall · Panneaux mariage · Murs floraux · Néons personnalisés · Fontaines décoratives</p>
+<section class="section profil-sec">
+  <div class="wrap">
+    <div class="offer">
+      <img class="offer-seal" src="/assets/logos/monogramme-blanc.png" alt="Monogramme Exodus Events" width="611" height="1192">
+      <span class="eyebrow">03 — Notre promesse</span>
+      <p class="quote">Votre vision d'abord. Le reste ensuite.</p>
+      <ol class="promise">
+        <li><b>Consultation gratuite</b><span>Nous écoutons votre histoire, vos envies, vos contraintes.</span></li>
+        <li><b>Dossier de vision offert</b><span>Un document complet : concept, ambiance, déroulé, services, estimation du budget.</span></li>
+        <li><b>Modifications libres</b><span>Vous changez tout ce que vous voulez, autant de fois que nécessaire.</span></li>
+      </ol>
+      <p class="promise-note">Aucun contrat, aucun paiement tant que la vision de votre événement ne vous ressemble pas parfaitement.</p>
     </div>
   </div>
 </section>
 
-<hr class="sep">
-
-<!-- ══════════════════════════════════════
-     BAR À PARFUM
-══════════════════════════════════════ -->
-<section class="section">
-  <span class="label">06 — Exodus Perfume Experience</span>
-  <div class="divider"></div>
-  <h2>Le Bar à Parfum</h2>
-  <p style="max-width:600px;margin-top:12px;font-style:italic;font-size:1.05rem;color:var(--gold-light);">"Un parfum. Votre histoire. 4 essences d'exception à mélanger. Un dosage unique comme vous."</p>
-
-  <div class="essence-grid">
-    <div class="essence-item">
-      <div class="essence-icon">◈</div>
-      <h3 class="gold">Shemen</h3>
-      <p style="font-size:.8rem;margin-top:8px;">Chaud · Ambré · Boisé<br>Profond · Mystérieux</p>
+<section class="section section--ivory profil-sec">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">04 — Services</span>
+      <h2 class="h2">Nous nous occupons <em>de tout.</em></h2>
+      <p class="lead">Treize pôles réunis en sept univers, sous une seule direction artistique.</p>
     </div>
-    <div class="essence-item">
-      <div class="essence-icon">❋</div>
-      <h3 class="gold">Hadassa</h3>
-      <p style="font-size:.8rem;margin-top:8px;">Floral · Féminin · Délicat<br>Royal · Sophistiqué</p>
-    </div>
-    <div class="essence-item">
-      <div class="essence-icon">✦</div>
-      <h3 class="gold">Éden</h3>
-      <p style="font-size:.8rem;margin-top:8px;">Frais · Lumineux · Pur<br>Naturel · Apaisant</p>
-    </div>
-    <div class="essence-item">
-      <div class="essence-icon">◉</div>
-      <h3 class="gold">Ruah</h3>
-      <p style="font-size:.8rem;margin-top:8px;">Aérien · Musqué · Doux<br>Sensuel · Enveloppant</p>
+    <div class="svc-index">
+      <div><h3>Conception &amp; coordination</h3><ul><li><b>A</b> Organisation &amp; coordination</li></ul></div>
+      <div><h3>Décor &amp; ambiance</h3><ul><li><b>B</b> Décoration événementielle</li><li><b>C</b> Luxury Event Rentals</li><li><b>D</b> Champagne wall &amp; installations</li></ul></div>
+      <div><h3>Gastronomie</h3><ul><li><b>E</b> Restauration &amp; traiteur</li><li><b>F</b> Bubbl' Flow — bubble tea</li></ul></div>
+      <div><h3>Expériences</h3><ul><li><b>G</b> Bar à parfum</li><li><b>H</b> Photo Experience &amp; 360</li></ul></div>
+      <div><h3>Divertissement</h3><ul><li><b>I</b> Animation, DJ, MC &amp; artistes</li></ul></div>
+      <div><h3>Digital</h3><ul><li><b>J</b> Sites de mariage, sites d'événements, billetterie &amp; plateformes</li></ul></div>
+      <div><h3>Création &amp; marketing</h3><ul><li><b>K</b> Design &amp; identité visuelle</li><li><b>L</b> Marketing digital &amp; vidéos IA</li><li><b>M</b> Papeterie : menus, plans de table, marque-places</li></ul></div>
     </div>
   </div>
+</section>
 
-  <div class="card card-gold" style="margin-top:32px;">
-    <h3 style="margin-bottom:12px;">Deux formats, une même signature</h3>
-    <div class="grid-2" style="gap:24px;margin-top:16px;">
-      <div>
-        <span class="label">Parfum Solide · 30ml</span>
-        <p style="font-size:.85rem;margin-top:8px;">Concentré · Sans alcool · Longue tenue · Parfait pour la peau</p>
+<section class="section profil-sec">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">05 — Expériences signatures</span>
+      <h2 class="h2">Ce que vos invités <em>emportent.</em></h2>
+    </div>
+    <div class="essences" style="margin-bottom:clamp(48px,7vw,80px)">
+      <div class="essence" style="--c:#8a5a2b"><span class="orb"></span><h3 class="h3">Shemen</h3><p>Chaud, ambré, boisé.</p></div>
+      <div class="essence" style="--c:#c98a9a"><span class="orb"></span><h3 class="h3">Hadassa</h3><p>Floral, délicat, royal.</p></div>
+      <div class="essence" style="--c:#9bbf8a"><span class="orb"></span><h3 class="h3">Éden</h3><p>Frais, lumineux, pur.</p></div>
+      <div class="essence" style="--c:#d8cfe6"><span class="orb"></span><h3 class="h3">Ruah</h3><p>Aérien, musqué, doux.</p></div>
+    </div>
+    <div class="split split--top">
+      <div style="display:grid;gap:14px"><span class="eyebrow">Bar à parfum</span><p class="muted">Chaque invité compose un parfum unique à partir de quatre essences d'exception, en format solide ou liquide de 30 ml.</p></div>
+      <div style="display:grid;gap:14px"><span class="eyebrow">Bubbl' Flow</span><p class="muted">Neuf saveurs signatures : Bissap Flow, Mangue Sun, Gnamakou Cream, Coco Chill, Passion Vibe, Grenade Pop, Baobab Breeze, Tamarin Zing, Cocota Mood.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--ivory profil-sec">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">06 — Processus</span>
+      <h2 class="h2">De la vision <em>à la réalité.</em></h2>
+    </div>
+    <ol class="process" style="list-style:none">
+      <li class="step"><span class="step-dot">01</span><div><h3>Consultation</h3><p>Gratuite : votre histoire, vos envies.</p></div></li>
+      <li class="step"><span class="step-dot">02</span><div><h3>Dossier de vision</h3><p>Le concept complet, offert.</p></div></li>
+      <li class="step"><span class="step-dot">03</span><div><h3>Ajustements</h3><p>Libres, sans engagement.</p></div></li>
+      <li class="step"><span class="step-dot">04</span><div><h3>Validation</h3><p>Contrat et acompte, seulement si vous êtes conquis.</p></div></li>
+      <li class="step"><span class="step-dot">05</span><div><h3>Création</h3><p>Planification, design, équipes.</p></div></li>
+      <li class="step"><span class="step-dot">06</span><div><h3>Jour J</h3><p>Installation et supervision.</p></div></li>
+      <li class="step"><span class="step-dot">07</span><div><h3>Bilan</h3><p>Vous gardez le souvenir.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section profil-sec">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">07 — Identité</span>
+      <h2 class="h2">Un logo, <em>un monogramme.</em></h2>
+    </div>
+    <div class="logo-gallery logo-gallery--2">
+      <figure class="logo-card">
+        <div class="art art--wide"><img src="/assets/logos/exodus-script.png" alt="Logo principal Exodus Events Agency" width="1366" height="628"></div>
+        <figcaption class="meta"><b>Le logo principal</b><span>Calligraphie « Exodus » et bloc doré « Events ».</span></figcaption>
+      </figure>
+      <figure class="logo-card">
+        <div class="art art--nude"><img src="/assets/logos/monogramme-noir.png" alt="Monogramme Exodus Events" width="611" height="1192"></div>
+        <figcaption class="meta"><b>Le monogramme</b><span>L'arche et ses deux « E » entrelacés.</span></figcaption>
+      </figure>
+    </div>
+    <div class="split split--top" style="margin-top:clamp(40px,6vw,70px)">
+      <div class="palette">
+        <div style="background:#000;color:#fff">NOIR</div>
+        <div style="background:#fff;color:#000">BLANC</div>
+        <div style="background:#b8924a;color:#000">OR — TOUCHE RARE</div>
       </div>
-      <div>
-        <span class="label">Parfum Liquide · 30ml</span>
-        <p style="font-size:.85rem;margin-top:8px;">Extrait de parfum · Haute concentration · Vaporisateur · Longue tenue</p>
+      <div class="type-specimen">
+        <p style="font-family:var(--display);font-size:2.6rem;line-height:1;text-transform:uppercase">Anton — titres</p>
+        <p style="font-family:var(--serif);font-style:italic;font-size:2.4rem;line-height:1.1">Instrument Serif — accents</p>
+        <p style="font-size:1.1rem">Inter Tight — texte courant</p>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="sep">
-
-<!-- ══════════════════════════════════════
-     PROCESSUS CLIENT
-══════════════════════════════════════ -->
-<section class="section">
-  <span class="label">07 — Notre Processus</span>
-  <div class="divider"></div>
-  <h2>De la Vision à la Réalité</h2>
-  <p style="max-width:500px;margin-top:12px;">Sept étapes pour transformer chaque projet en expérience exceptionnelle.</p>
-
-  <div class="timeline" style="margin-top:48px;max-width:640px;">
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-num">ÉTAPE 01</div>
-      <h3>Consultation</h3>
-      <p style="font-size:.9rem;margin-top:6px;">Analyse approfondie de vos besoins, de votre vision et de vos attentes.</p>
+<section class="section section--ivory profil-sec">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">08 — Vision long terme</span>
+      <h2 class="h2">Construire <em>une référence.</em></h2>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-num">ÉTAPE 02</div>
-      <h3>Demande de Devis</h3>
-      <p style="font-size:.9rem;margin-top:6px;">Évaluation complète du projet et proposition personnalisée.</p>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-num">ÉTAPE 03</div>
-      <h3>Planification</h3>
-      <p style="font-size:.9rem;margin-top:6px;">Organisation structurée et coordination de tous les éléments.</p>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-num">ÉTAPE 04</div>
-      <h3>Design & Direction Artistique</h3>
-      <p style="font-size:.9rem;margin-top:6px;">Création du concept visuel et sélection des éléments décoratifs.</p>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-num">ÉTAPE 05</div>
-      <h3>Installation</h3>
-      <p style="font-size:.9rem;margin-top:6px;">Montage et préparation de tous les espaces et équipements.</p>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-num">ÉTAPE 06</div>
-      <h3>Jour J</h3>
-      <p style="font-size:.9rem;margin-top:6px;">Coordination événementielle complète et supervision en temps réel.</p>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-num">ÉTAPE 07</div>
-      <h3>Désinstallation</h3>
-      <p style="font-size:.9rem;margin-top:6px;">Récupération du matériel et bilan de l'expérience.</p>
+    <div class="horizon">
+      <div><span class="eyebrow">Court terme · 1 à 2 ans</span><span class="when">Les fondations</span><ul class="ticks"><li>Développer la clientèle locale</li><li>Construire un portfolio professionnel</li><li>Développer les réseaux sociaux</li><li>Créer un catalogue premium</li><li>Acquérir le matériel événementiel</li></ul></div>
+      <div><span class="eyebrow">Moyen terme · 3 à 5 ans</span><span class="when">La croissance</span><ul class="ticks"><li>Ouvrir un showroom et un entrepôt</li><li>Plusieurs photobooths</li><li>Développer le service corporatif</li><li>Une équipe complète</li><li>Des partenariats solides</li></ul></div>
+      <div><span class="eyebrow">Long terme · 5 à 10 ans</span><span class="when">La référence</span><ul class="ticks"><li>Une référence canadienne reconnue</li><li>Grands événements et festivals</li><li>Plusieurs divisions de marque</li><li>Un espace événementiel à nous</li><li>Plusieurs succursales</li></ul></div>
     </div>
   </div>
 </section>
 
-<hr class="sep">
-
-<!-- ══════════════════════════════════════
-     VISION LONG TERME
-══════════════════════════════════════ -->
-<section class="section-full">
-  <div class="section-inner">
-    <span class="label">08 — Vision Long Terme</span>
-    <div class="divider"></div>
-    <h2>Construire Une Référence</h2>
-  </div>
-
-  <div class="vision-cols" style="margin-top:40px;">
-    <div class="vision-col">
-      <div class="vision-period">Court terme</div>
-      <div class="vision-years">1 – 2 ans</div>
-      <ul>
-        <li>Développer la clientèle locale</li>
-        <li>Construire un portfolio professionnel</li>
-        <li>Développer les réseaux sociaux</li>
-        <li>Créer un catalogue premium</li>
-        <li>Acheter du matériel événementiel</li>
-      </ul>
+<section class="section profil-sec">
+  <div class="wrap cta-final">
+    <span class="eyebrow">09 — Contact</span>
+    <h2 class="display">Parlons de<br><em>votre rêve.</em></h2>
+    <div class="profil-contact">
+      <a href="mailto:info@exodusevents.org">info@exodusevents.org</a>
+      <a href="tel:+15065889463">(506) 588-9463</a>
+      <a href="https://www.instagram.com/exodusevents__/" target="_blank" rel="noopener">@exodusevents__</a>
+      <span>Moncton, Nouveau-Brunswick, Canada</span>
     </div>
-    <div class="vision-col">
-      <div class="vision-period">Moyen terme</div>
-      <div class="vision-years">3 – 5 ans</div>
-      <ul>
-        <li>Ouvrir un showroom / entrepôt</li>
-        <li>Posséder plusieurs photobooths</li>
-        <li>Développer un service corporatif</li>
-        <li>Créer une équipe complète</li>
-        <li>Développer des partenariats</li>
-      </ul>
-    </div>
-    <div class="vision-col">
-      <div class="vision-period">Long terme</div>
-      <div class="vision-years">5 – 10 ans</div>
-      <ul>
-        <li>Référence canadienne reconnue</li>
-        <li>Grands événements et festivals</li>
-        <li>Plusieurs divisions de marque</li>
-        <li>Espace événementiel propre</li>
-        <li>Franchise ou plusieurs branches</li>
-        <li>Référence de l'événementiel de luxe au Canada</li>
-      </ul>
+    <div class="btn-row" style="justify-content:center">
+      <a class="btn" href="/devis">Consultation gratuite <span class="arrow">→</span></a>
+      <button class="btn btn--ghost" type="button" data-print>Enregistrer en PDF</button>
     </div>
   </div>
 </section>
-
-<hr class="sep">
-
-<!-- ══════════════════════════════════════
-     CONTACT
-══════════════════════════════════════ -->
-<section class="contact-section">
-  <div style="padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));">
-    <span class="label">09 — Contact</span>
-    <div class="divider divider-center"></div>
-    <h2>Nous créons l'exception.</h2>
-    <p class="italic gold" style="font-size:1.2rem;margin-top:8px;font-family:var(--playfair);">De la genèse à l'exaucement.</p>
-
-    <div class="contact-info">
-      <span>📍 Moncton, New Brunswick</span>
-      <span>✉ <a href="mailto:info@exodusevents.org">info@exodusevents.org</a></span>
-      <span>📱 <a href="tel:+15065889463">(506) 588-9463</a></span>
-      <span>📸 @exodusevents__ &nbsp;|&nbsp; Exodus Events Agency</span>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/" aria-label="Exodus Events — accueil">
+          <img class="brand-logo" src="/assets/logos/exodus-script.png" alt="Exodus Events Agency" width="1366" height="628">
+        </a>
+        <p><span class="serif-it">De la genèse à l'exaucement.</span><br>Agence événementielle de luxe &amp; d'expériences immersives, née à Moncton.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/exodusevents__/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg>
+          </a>
+          <a href="mailto:info@exodusevents.org" aria-label="Courriel">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 6 9 7 9-7"/></svg>
+          </a>
+          <a href="tel:+15065889463" aria-label="Téléphone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services#organisation">Organisation</a></li>
+          <li><a href="/services#decoration">Décoration</a></li>
+          <li><a href="/services#location">Location de luxe</a></li>
+          <li><a href="/services#restauration">Restauration &amp; traiteur</a></li>
+          <li><a href="/services#animation">Animation</a></li>
+          <li><a href="/services#marketing">Marketing &amp; vidéos IA</a></li>
+          <li><a href="/services#papeterie">Menus &amp; papeterie</a></li>
+          <li><a href="/services#installations">Champagne wall</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>La Maison</h4>
+        <ul>
+          <li><a href="/experiences#parfum">Bar à parfum</a></li>
+          <li><a href="/experiences#bubbl">Bubbl' Flow</a></li>
+          <li><a href="/experiences#photo">Photo 360</a></li>
+          <li><a href="/digital">Exodus Digital</a></li>
+          <li><a href="/partenaires">Devenir partenaire</a></li>
+          <li><a href="/a-propos#histoire">Notre histoire</a></li>
+          <li><a href="/profil">Profil d'entreprise</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@exodusevents.org">info@exodusevents.org</a></li>
+          <li><a href="tel:+15065889463">(506) 588-9463</a></li>
+          <li><span class="muted">Moncton, Nouveau-Brunswick</span></li>
+          <li><a href="/devis">Consultation gratuite →</a></li>
+        </ul>
+      </div>
     </div>
-
-    <div style="margin-top:56px;padding:32px;border:1px solid var(--border);display:inline-block;max-width:520px;">
-      <span class="label">Offre de lancement</span>
-      <p style="margin-top:12px;font-style:italic;font-size:1rem;">Pour la phase de lancement, nous vous accompagnons dans votre rêve <strong style="color:var(--gold);">gratuitement</strong>.</p>
-      <p style="margin-top:12px;font-size:.85rem;">Contactez-nous pour discuter de votre projet. Chaque événement commence par une conversation.</p>
-    </div>
-
-    <p style="margin-top:80px;font-family:var(--cinzel);font-size:11px;letter-spacing:.2em;color:var(--fg-muted);">EXODUS EVENTS AGENCY · EST. 2026 · MONCTON, NB</p>
   </div>
-</section>
-
+  <div class="footer-word" aria-hidden="true">EXODUS</div>
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Exodus Events Agency · Moncton, NB</span>
+      <button type="button" data-celebrate>✺ Célébrer</button>
+      <span>Rendre les gens heureux, un événement à la fois.</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
