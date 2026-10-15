@@ -141,6 +141,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .site-header a, .site-header button { pointer-events: auto; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand-logo { height: 46px; width: auto; flex: none; }
+.brand-mark { height: 44px; width: auto; flex: none; }
+.brand-word { height: 19px; width: auto; }
 .site-footer .brand-logo { height: 96px; }
 .nav { display: flex; align-items: center; gap: 28px; }
 .nav a:not(.btn) {
@@ -199,6 +201,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .menu-toggle { display: inline-flex; }
   :root { --header-h: 66px; }
   .brand-logo { height: 38px; }
+  .brand-mark { height: 38px; }
+  .brand-word { height: 15px; }
 }
 
 /* ── Héros de l'accueil ────────────────────────────────── */
@@ -725,7 +729,7 @@ fieldset { border: 0; display: grid; gap: 16px; min-width: 0; }
 
 /* Rideau entre les pages */
 .curtain { position: fixed; inset: 0; z-index: 350; background: #000; display: grid; place-items: center; pointer-events: none; transform: translateY(100%); }
-.curtain img { width: 96px; height: auto; opacity: 0; transition: opacity 0.3s; }
+.curtain img { height: 120px; width: auto; opacity: 0; transition: opacity 0.3s; }
 .curtain.cover { transform: none; transition: transform 0.6s var(--ease); pointer-events: auto; }
 .curtain.cover img { opacity: 1; transition-delay: 0.2s; }
 .curtain.leave { transform: translateY(-100%); transition: transform 0.8s var(--ease); }

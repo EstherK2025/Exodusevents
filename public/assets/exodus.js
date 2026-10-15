@@ -84,7 +84,7 @@
   /* ── Rideau entre les pages ─────────────────────────── */
   var curtain = document.createElement("div");
   curtain.className = "curtain";
-  curtain.innerHTML = '<img src="/assets/logos/ee-blanc.png" alt="">';
+  curtain.innerHTML = '<img src="/assets/logos/monogramme-blanc.png" alt="">';
   document.body.appendChild(curtain);
   if (!reduceMotion && store.get("exodus-curtain")) {
     store.set("exodus-curtain", "");
