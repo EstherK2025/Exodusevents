@@ -84,7 +84,7 @@
   /* ── Rideau entre les pages ─────────────────────────── */
   var curtain = document.createElement("div");
   curtain.className = "curtain";
-  curtain.innerHTML = '<img src="/assets/logos/monogramme-blanc.png" alt="">';
+  curtain.innerHTML = '<img src="/assets/logos/ee-blanc.png" alt="">';
   document.body.appendChild(curtain);
   if (!reduceMotion && store.get("exodus-curtain")) {
     store.set("exodus-curtain", "");
@@ -374,17 +374,18 @@
   var olist = $("[data-olist]");
   if (olist && finePointer && !reduceMotion) {
     var prev = document.createElement("div"); prev.className = "opreview";
-    var pimg = document.createElement("img"); pimg.alt = ""; prev.appendChild(pimg);
+    var pimg = document.createElement("img"); pimg.alt = "";
+    var pcap = document.createElement("span"); pcap.className = "cap";
+    prev.appendChild(pimg); prev.appendChild(pcap);
     document.body.appendChild(prev);
     var pm = { x: 0, y: 0 }, pp = { x: 0, y: 0 }, lastX = 0;
     olist.addEventListener("pointermove", function (e) { pm.x = e.clientX; pm.y = e.clientY; });
     $$(".orow", olist).forEach(function (row) {
       row.addEventListener("pointerenter", function () {
-        pimg.src = row.getAttribute("data-img");
-        var bg = row.getAttribute("data-bg");
-        pimg.style.objectFit = bg === "cover" ? "cover" : "contain";
-        pimg.style.padding = bg === "cover" ? "0" : "14%";
-        prev.style.background = bg === "cover" ? "#000" : bg;
+        var clair = row.hasAttribute("data-light");
+        prev.classList.toggle("light", clair);
+        pimg.src = clair ? "/assets/logos/ee-noir.png" : "/assets/logos/ee-blanc.png";
+        pcap.textContent = row.getAttribute("data-cap") || "";
         prev.classList.add("on");
       });
     });
