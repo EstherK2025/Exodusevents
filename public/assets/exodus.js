@@ -348,4 +348,62 @@
       });
     });
   });
+  /* ── Logo animé : suit le défilement, la souris et l'inclinaison du téléphone ── */
+  var logoBox = $("[data-logo-motion]");
+  if (logoBox && !reduceMotion) {
+    var float = $(".logo-float", logoBox);
+    var cible = { x: 0, y: 0 }, pos = { x: 0, y: 0 }, anime = false;
+    var borne = function (v) { return Math.max(-1, Math.min(1, v)); };
+    function boucle() {
+      pos.x += (cible.x - pos.x) * 0.08;
+      pos.y += (cible.y - pos.y) * 0.08;
+      var r = logoBox.getBoundingClientRect();
+      var defile = Math.max(0, -r.top + 120);            // pixels défilés depuis le haut du logo
+      float.style.setProperty("--px", pos.x.toFixed(4));
+      float.style.setProperty("--py", pos.y.toFixed(4));
+      float.style.setProperty("--sy", (defile * 0.35).toFixed(1));
+      float.style.setProperty("--ss", Math.min(defile / 2400, 0.12).toFixed(4));
+      if (Math.abs(cible.x - pos.x) > 0.001 || Math.abs(cible.y - pos.y) > 0.001 || anime) requestAnimationFrame(boucle);
+      else enCours = false;
+    }
+    var enCours = false;
+    function relancer() { if (!enCours) { enCours = true; requestAnimationFrame(boucle); } }
+
+    // Souris (ordinateur)
+    window.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse") return;
+      cible.x = borne((e.clientX / innerWidth - 0.5) * 2);
+      cible.y = borne((e.clientY / innerHeight - 0.5) * 2);
+      relancer();
+    }, { passive: true });
+    document.addEventListener("mouseleave", function () { cible.x = 0; cible.y = 0; relancer(); });
+
+    // Défilement (téléphone et ordinateur)
+    window.addEventListener("scroll", relancer, { passive: true });
+
+    // Inclinaison du téléphone (gyroscope)
+    var base = null;
+    function orientation(e) {
+      if (e.beta == null || e.gamma == null) return;
+      if (!base) base = { b: e.beta, g: e.gamma };       // position de départ = neutre
+      cible.x = borne((e.gamma - base.g) / 25);
+      cible.y = borne((e.beta - base.b) / 25);
+      relancer();
+    }
+    if (window.DeviceOrientationEvent) {
+      if (typeof DeviceOrientationEvent.requestPermission === "function") {
+        // iPhone : l'autorisation doit être demandée lors d'un premier toucher
+        var demander = function () {
+          DeviceOrientationEvent.requestPermission().then(function (etat) {
+            if (etat === "granted") window.addEventListener("deviceorientation", orientation);
+          }).catch(function () {});
+          window.removeEventListener("touchend", demander);
+        };
+        window.addEventListener("touchend", demander, { once: true });
+      } else {
+        window.addEventListener("deviceorientation", orientation);
+      }
+    }
+    relancer();
+  }
 })();

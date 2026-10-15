@@ -971,3 +971,27 @@ a.logo-card:hover .meta b { color: var(--gold-light); }
   .promise { grid-template-columns: 1fr; }
   .promise li + li { border-left: 0; border-top: 1px solid var(--line); }
 }
+
+/* ── Logo animé (défilement, souris, inclinaison du téléphone) ── */
+.hero-logo { perspective: 900px; }
+.logo-float {
+  position: relative;
+  transform:
+    translate3d(calc(var(--px, 0) * 18px), calc(var(--py, 0) * 12px + var(--sy, 0) * 1px), 0)
+    rotateY(calc(var(--px, 0) * 10deg)) rotateX(calc(var(--py, 0) * -8deg))
+    scale(calc(1 - var(--ss, 0)));
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.logo-float img { position: relative; z-index: 1; }
+/* reflet doré qui glisse sur le logo selon le mouvement */
+.logo-shine {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none; mix-blend-mode: overlay;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 236, 190, 0.55) 50%, transparent 65%) no-repeat;
+  background-size: 250% 100%;
+  background-position: calc(50% - var(--px, 0) * 60%) 0;
+  -webkit-mask: url(/assets/logos/exodus-script.png) center / 100% 100% no-repeat;
+  mask: url(/assets/logos/exodus-script.png) center / 100% 100% no-repeat;
+  opacity: 0.9;
+}
+@media (prefers-reduced-motion: reduce) { .logo-float { transform: none; } .logo-shine { display: none; } }
