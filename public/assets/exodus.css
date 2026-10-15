@@ -912,3 +912,22 @@ a.logo-card:hover .meta b { color: var(--gold-light); }
 .chapter > div { display: grid; gap: 16px; max-width: 760px; }
 .chapter .h2 { font-size: clamp(1.5rem, 3vw, 2.3rem); }
 @media (max-width: 600px) { .chapter { grid-template-columns: 1fr; gap: 12px; } }
+
+/* ── Portrait en arche ─────────────────────────────────── */
+.arch-portrait { position: relative; width: min(360px, 82%); margin-inline: auto; display: grid; gap: 44px; justify-items: center; }
+.arch {
+  position: relative; width: 100%; aspect-ratio: 5 / 7.4; overflow: hidden;
+  border-radius: 999px 999px 4px 4px; background: #eadfd1;
+}
+.arch img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; transition: transform 1.4s var(--ease); }
+.arch-portrait:hover .arch img { transform: scale(1.03); }
+.arch-portrait::before {
+  content: ""; position: absolute; inset: -14px -14px auto; aspect-ratio: 5 / 7.4; width: calc(100% + 28px);
+  border: 1px solid var(--gold); border-radius: 999px 999px 4px 4px; opacity: 0.55; pointer-events: none;
+}
+.arch-seal {
+  position: absolute; left: -12%; bottom: 46px; width: 34%; height: auto;
+  background: var(--noir); border-radius: 50%; padding: 4px; animation: spin 50s linear infinite;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+}
+.arch-portrait figcaption { font-family: var(--playfair); font-style: italic; color: var(--gold-light); font-size: 1.05rem; text-align: center; }
