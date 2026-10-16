@@ -256,6 +256,9 @@
     if (finePointer) window.addEventListener("pointermove", function (e) { souris.x = (e.clientX / innerWidth - 0.5) * 2; souris.y = (e.clientY / innerHeight - 0.5) * 2; }, { passive: true });
 
     var visible = true, t = 0;
+    var encre = getComputedStyle(cvs).color || "#0a0a0a";   // couleur des particules = couleur du texte
+    var clair = /rgb\((\d+)/.exec(encre); clair = clair && +clair[1] < 128;   // texte foncé = fond clair
+    var orParticules = clair ? "#a07a36" : "#d4ad62";
     if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(cvs);
 
     function frame() {
@@ -279,9 +282,9 @@
         (p.c ? ors : blancs).push(p);
       }
       ctx.globalAlpha = 1 - scatter * 0.85;
-      ctx.fillStyle = "#ffffff";
+      ctx.fillStyle = encre;
       for (i = 0; i < blancs.length; i++) { p = blancs[i]; ctx.fillRect(p.x, p.y, p.s, p.s); }
-      ctx.fillStyle = "#d4ad62";
+      ctx.fillStyle = orParticules;
       for (i = 0; i < ors.length; i++) { p = ors[i]; ctx.fillRect(p.x, p.y, p.s, p.s); }
     }
     img.onload = function () {
