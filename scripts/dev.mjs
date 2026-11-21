@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 import devis from "../api/devis.js";
 import partenaire from "../api/partenaire.js";
 import admin from "../api/admin.js";
+import digital from "../api/digital.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "public");
 const port = Number(process.env.PORT) || 3000;
@@ -25,7 +26,7 @@ async function fichier(p) {
 createServer(async (req, res) => {
   const url = new URL(req.url, "http://localhost");
 
-  const api = { "/api/devis": devis, "/api/partenaire": partenaire, "/api/admin": admin }[url.pathname];
+  const api = { "/api/devis": devis, "/api/partenaire": partenaire, "/api/admin": admin, "/api/digital": digital }[url.pathname];
   if (api) {
     let raw = "";
     for await (const c of req) raw += c;
