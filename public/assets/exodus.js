@@ -681,4 +681,73 @@
       });
     });
   });
+  /* ── ME-IT : terminal qui s'écrit et pluie binaire ─────── */
+  var termBody = $("[data-term-body]");
+  if (termBody) {
+    var lignes = [
+      ["p", "$ me-it --diagnostic --organisation"],
+      ["", "\n> analyse du site web ............ "], ["ok", "OK"],
+      ["", "\n> postes de travail (12) ......... "], ["ok", "à jour"],
+      ["", "\n> mots de passe faibles .......... "], ["warn", "3 détectés"],
+      ["", "\n> courriels d'hameçonnage ........ "], ["warn", "risque élevé"],
+      ["p", "\n\n$ me-it --plan"],
+      ["", "\n  [01] web.dev        site sécurisé, mobile"],
+      ["", "\n  [02] os.setup       postes configurés"],
+      ["", "\n  [03] cyber.training équipe formée"],
+      ["", "\n  [04] cyber.talks    conférence planifiée"],
+      ["p", "\n\n$ "], ["ok", "système protégé ✓"]
+    ];
+    var esc = function (t) { return t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); };
+    var rendu = function (n) {
+      var out = "", reste = n;
+      for (var i = 0; i < lignes.length && reste > 0; i++) {
+        var t = lignes[i][1].slice(0, reste); reste -= lignes[i][1].length;
+        out += lignes[i][0] ? '<span class="' + lignes[i][0] + '">' + esc(t) + "</span>" : esc(t);
+      }
+      return out + '<span class="cur"></span>';
+    };
+    var total = lignes.reduce(function (a, l) { return a + l[1].length; }, 0);
+    if (reduceMotion) termBody.innerHTML = rendu(total);
+    else {
+      var lance = false;
+      var demarrer = function () {
+        if (lance) return; lance = true;
+        var n = 0;
+        (function tape() {
+          n += 2; termBody.innerHTML = rendu(n);
+          if (n < total) setTimeout(tape, 28);
+          else setTimeout(function () { n = 0; tape(); }, 6000);
+        })();
+      };
+      if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { if (e[0].isIntersecting) demarrer(); }).observe(termBody);
+      else demarrer();
+    }
+  }
+  var bin = $("[data-binary]");
+  if (bin && bin.getContext && !reduceMotion) {
+    var bx = bin.getContext("2d"), cols = [], fs = 14, bw = 0, bh = 0, binVisible = false;
+    var taille = function () {
+      bw = bin.width = bin.offsetWidth; bh = bin.height = bin.offsetHeight;
+      cols = []; for (var c = 0; c < Math.ceil(bw / fs); c++) cols.push(Math.random() * -bh / fs);
+    };
+    taille(); window.addEventListener("resize", taille);
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { binVisible = e[0].isIntersecting; }).observe(bin);
+    var dernier = 0;
+    (function pluie(t) {
+      requestAnimationFrame(pluie);
+      if (!binVisible || t - dernier < 60) return; dernier = t;
+      bx.fillStyle = "rgba(11,15,12,0.18)"; bx.fillRect(0, 0, bw, bh);
+      bx.fillStyle = "#3ddc84"; bx.font = fs + "px JetBrains Mono, monospace";
+      for (var c = 0; c < cols.length; c++) {
+        bx.fillText(Math.random() > 0.5 ? "1" : "0", c * fs, cols[c] * fs);
+        cols[c] = cols[c] * fs > bh && Math.random() > 0.975 ? 0 : cols[c] + 1;
+      }
+    })(0);
+  }
+  /* Boutons d'offre : présélectionne le besoin dans le formulaire */
+  $$("[data-besoin]").forEach(function (a) {
+    a.addEventListener("click", function () {
+      var sel = $("#d-besoin"); if (sel) sel.value = a.getAttribute("data-besoin");
+    });
+  });
 })();
