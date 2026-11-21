@@ -51,7 +51,7 @@ Après une modification dans `src/`, lancer `npm run build` : les fichiers
    Les réglages sont lus depuis `vercel.json` (rien à changer).
 2. **Settings → Environment Variables** (voir `.env.example`) :
    - `RESEND_API_KEY` — clé https://resend.com pour envoyer les devis ;
-   - `EXODUS_EMAIL_TO` — adresse qui reçoit les demandes (défaut `info@exodusevents.org`) ;
+   - `EXODUS_EMAIL_TO` — adresse qui reçoit les demandes (défaut `exevagency@gmail.com`) ;
    - `EXODUS_EMAIL_FROM` — expéditeur, ex. `Exodus Events <devis@exodusevents.org>`
      (le domaine `exodusevents.org` doit être vérifié dans Resend) ;
    - `DATABASE_URL` — chaîne de connexion de la base **Neon** `exodusevents`
