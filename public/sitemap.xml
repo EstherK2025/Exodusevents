@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url><loc>https://exoduseagency.ca/</loc><xhtml:link rel="alternate" hreflang="en-CA" href="https://exoduseagency.ca/en"/></url>
-  <url><loc>https://exoduseagency.ca/en</loc><xhtml:link rel="alternate" hreflang="fr-CA" href="https://exoduseagency.ca/"/></url>
-  <url><loc>https://exoduseagency.ca/confidentialite</loc><xhtml:link rel="alternate" hreflang="en-CA" href="https://exoduseagency.ca/privacy"/></url>
-  <url><loc>https://exoduseagency.ca/privacy</loc><xhtml:link rel="alternate" hreflang="fr-CA" href="https://exoduseagency.ca/confidentialite"/></url>
+  <url><loc>https://www.exoduseagency.ca/</loc><xhtml:link rel="alternate" hreflang="en-CA" href="https://www.exoduseagency.ca/en"/></url>
+  <url><loc>https://www.exoduseagency.ca/en</loc><xhtml:link rel="alternate" hreflang="fr-CA" href="https://www.exoduseagency.ca/"/></url>
+  <url><loc>https://www.exoduseagency.ca/confidentialite</loc><xhtml:link rel="alternate" hreflang="en-CA" href="https://www.exoduseagency.ca/privacy"/></url>
+  <url><loc>https://www.exoduseagency.ca/privacy</loc><xhtml:link rel="alternate" hreflang="fr-CA" href="https://www.exoduseagency.ca/confidentialite"/></url>
 </urlset>
