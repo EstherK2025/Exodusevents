@@ -60,13 +60,13 @@ Après une modification dans `src/`, lancer `npm run build` : les fichiers
 2. **Settings → Environment Variables** (voir `.env.example`) :
    - `RESEND_API_KEY` — clé https://resend.com pour envoyer les devis ;
    - `EXODUS_EMAIL_TO` — adresse qui reçoit les demandes (défaut `exoduseagency@gmail.com`) ;
-   - `EXODUS_EMAIL_FROM` — expéditeur, ex. `Exodus Events <devis@exodusevents.org>`
-     (le domaine `exodusevents.org` doit être vérifié dans Resend) ;
+   - `EXODUS_EMAIL_FROM` — expéditeur, ex. `Exodus Events <devis@exoduseagency.ca>`
+     (le domaine `exoduseagency.ca` doit être vérifié dans Resend) ;
    - `DATABASE_URL` — chaîne de connexion de la base **Neon** `exodusevents`
      (Neon → projet → **Connect**). Le plus simple : dans Vercel, **Storage → Neon**
      relie la base au projet et crée la variable automatiquement ;
    - `ADMIN_PASSWORD` — mot de passe du tableau de bord `/admin`.
-3. **Settings → Domains** → ajouter `exodusevents.org` et `www.exodusevents.org`,
+3. **Settings → Domains** → ajouter `exoduseagency.ca` et `www.exoduseagency.ca`,
    puis créer les enregistrements DNS indiqués par Vercel chez votre registraire.
 
 Chaque demande est **enregistrée dans Neon** (tables `demandes_devis` et

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://exodusevents.org/sitemap.xml
+Sitemap: https://exoduseagency.ca/sitemap.xml
