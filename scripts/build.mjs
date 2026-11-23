@@ -46,7 +46,7 @@ for (const file of readdirSync(join(src, "pages")).filter((f) => f.endsWith(".ht
     .replaceAll(`data-nav="${meta.nav}"`, 'aria-current="page"')
     .replace(/ data-nav="[^"]*"/g, "");
   const html =
-    head.replaceAll("{{self}}", self).replaceAll("{{alt}}", alt).replaceAll("{{title}}", esc(meta.title)).replaceAll("{{robots}}", meta.robots || "index, follow").replaceAll("{{description}}", esc(meta.description)) +
+    head.replaceAll("{{frPath}}", lang === "fr" ? self : alt).replaceAll("{{enPath}}", lang === "en" ? self : alt).replaceAll("{{self}}", self).replaceAll("{{alt}}", alt).replaceAll("{{title}}", esc(meta.title)).replaceAll("{{robots}}", meta.robots || "index, follow").replaceAll("{{description}}", esc(meta.description)) +
     nav +
     raw.slice(m[0].length) +
     footer.replaceAll("{{alt}}", alt);

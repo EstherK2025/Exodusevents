@@ -956,3 +956,24 @@ fieldset { border: 0; display: grid; gap: 16px; min-width: 0; }
 .nav .lang::after { display: none; }
 .lang--m { display: none; margin-left: auto; margin-right: 6px; }
 @media (max-width: 1100px) { .lang--m { display: inline-flex; } }
+
+/* ── Pages légales & À propos ─────────────────────────── */
+.legal-hero .display { font-size: clamp(2.6rem, 8vw, 6.5rem); }
+.legal-body > * { max-width: 780px; }
+.legal-body h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(1.4rem, 2.6vw, 2rem); margin: 44px 0 14px; }
+.legal-body p, .legal-body li { color: var(--mute); line-height: 1.7; }
+.legal-body p + p { margin-top: 12px; }
+.legal-body ul { margin: 12px 0 0 1.2em; display: grid; gap: 6px; }
+.legal-body a { color: var(--fg); }
+.consent { font-size: 13px; color: var(--faint); margin-top: 14px; }
+.consent a { color: inherit; }
+.about { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(32px, 6vw, 90px); align-items: start; }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+.about-head { display: grid; gap: 20px; }
+.about-head .h2 { font-size: clamp(2.2rem, 5vw, 4.2rem); }
+.commit { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--fg); }
+.commit > div { padding: 22px 20px 22px 0; border-bottom: 1px solid var(--line); display: grid; gap: 6px; align-content: start; }
+.commit > div:nth-child(even) { padding-left: 20px; border-left: 1px solid var(--line); }
+.commit b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.35rem; line-height: 1.05; }
+.commit span { color: var(--mute); font-size: .95rem; }
+@media (max-width: 560px) { .commit { grid-template-columns: 1fr; } .commit > div:nth-child(even) { padding-left: 0; border-left: 0; } }
