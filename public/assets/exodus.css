@@ -948,3 +948,5 @@ fieldset { border: 0; display: grid; gap: 16px; min-width: 0; }
 .soon-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; }
 .soon-row > div { display: grid; gap: 12px; max-width: 640px; min-width: 0; }
 .soon-row .h2 { font-size: clamp(1.7rem, 4.4vw, 3.6rem); overflow-wrap: anywhere; }
+.site-footer .brand-mark { height: 64px; }
+.site-footer .brand-word { height: 26px; }
