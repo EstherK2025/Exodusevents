@@ -902,7 +902,7 @@ fieldset { border: 0; display: grid; gap: 16px; min-width: 0; }
 .meit-tag i { width: 9px; height: 9px; border-radius: 50%; background: var(--it); box-shadow: 0 0 12px var(--it); animation: pulse 1.6s ease-in-out infinite; }
 .meit-title { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: clamp(4.5rem, 14vw, 11rem); line-height: .9; letter-spacing: -0.06em; margin: 18px 0 22px; }
 .meit-title span { color: var(--it); animation: blink 1.1s steps(1) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
+@keyframes blink { 50% { opacity: 0.35; } }
 .meit-lead { font-size: clamp(1.05rem, 1.5vw, 1.25rem); line-height: 1.6; color: rgba(232,245,236,.72); max-width: 52ch; margin-bottom: 28px; }
 .meit-lead b { color: #fff; font-weight: 500; }
 .btn--it { background: var(--it); color: #04150b; border-color: var(--it); font-family: "JetBrains Mono", monospace; text-transform: none; letter-spacing: 0; }
@@ -941,3 +941,10 @@ fieldset { border: 0; display: grid; gap: 16px; min-width: 0; }
 .meit-home { --bg: #0b0f0c; background-color: #0b0f0c; background-image: linear-gradient(rgba(61,220,132,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(61,220,132,.05) 1px, transparent 1px); background-size: 48px 48px; }
 .meit-home .eyebrow { color: #3ddc84; font-family: "JetBrains Mono", monospace; letter-spacing: .04em; text-transform: none; }
 .meit-home .ticks li::before { content: "›"; color: #3ddc84; }
+
+/* ── Accueil ME-IT ─────────────────────────────────────── */
+.meit--hero { padding-top: calc(var(--header-h) + clamp(40px, 7vw, 90px)); min-height: 100svh; }
+.soon-band { border-block: 1px solid var(--line); }
+.soon-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; }
+.soon-row > div { display: grid; gap: 12px; max-width: 640px; min-width: 0; }
+.soon-row .h2 { font-size: clamp(1.7rem, 4.4vw, 3.6rem); overflow-wrap: anywhere; }

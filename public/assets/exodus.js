@@ -631,9 +631,9 @@
         var corps = "Type : " + d.typeLabel + "\nServices : " + d.services.join(", ") + "\nDate : " + (d.date || "à définir") +
           "\nInvités : " + d.invites + "\nLieu : " + (d.lieu || "à définir") + "\nBudget : " + (d.budget || "à discuter") +
           "\n\n" + d.message + "\n\n" + d.nom + "\n" + d.telephone;
-        var mail = "mailto:exevagency@gmail.com?subject=" + encodeURIComponent("Demande de consultation — " + d.typeLabel) + "&body=" + encodeURIComponent(corps);
+        var mail = "mailto:exoduseagency@gmail.com?subject=" + encodeURIComponent("Demande de consultation — " + d.typeLabel) + "&body=" + encodeURIComponent(corps);
         errBox.innerHTML = escapeHtml(err.message || "L'envoi n'a pas abouti.") +
-          " Vous pouvez aussi <a href=\"" + mail + "\">nous écrire directement</a> ou appeler le (506) 588-9463.";
+          " Vous pouvez aussi <a href=\"" + mail + "\">nous écrire directement</a>.";
         submit.disabled = false;
         submit.querySelector("span").textContent = "Réserver ma consultation";
       });
@@ -673,7 +673,7 @@
       }).catch(function (e) {
         var corps = Object.keys(d).filter(function (k) { return k !== "website" && d[k]; })
           .map(function (k) { return k + " : " + d[k]; }).join("\n");
-        var mail = "mailto:exevagency@gmail.com?subject=" + encodeURIComponent("Candidature partenaire — " + (d.entreprise || "")) + "&body=" + encodeURIComponent(corps);
+        var mail = "mailto:exoduseagency@gmail.com?subject=" + encodeURIComponent(f.getAttribute("data-simple-form") === "/api/digital" ? "Exodus Digital — " + (d.besoin || "projet") : "Candidature partenaire — " + (d.entreprise || "")) + "&body=" + encodeURIComponent(corps);
         err.innerHTML = (e.message || "L'envoi n'a pas abouti.").replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }) +
           " Vous pouvez aussi <a href=\"" + mail + "\">nous écrire directement</a>.";
         btn.disabled = false;

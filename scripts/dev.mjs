@@ -23,8 +23,12 @@ async function fichier(p) {
   try { return (await stat(p)).isFile() ? p : null; } catch { return null; }
 }
 
+const redirections = (JSON.parse(await readFile(join(root, "..", "vercel.json"), "utf8")).redirects || []);
+
 createServer(async (req, res) => {
   const url = new URL(req.url, "http://localhost");
+  const redir = redirections.find((r) => r.source === url.pathname);
+  if (redir) { res.statusCode = 307; res.setHeader("Location", redir.destination); return res.end(); }
 
   const api = { "/api/devis": devis, "/api/partenaire": partenaire, "/api/admin": admin, "/api/digital": digital }[url.pathname];
   if (api) {

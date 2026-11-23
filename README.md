@@ -6,6 +6,14 @@
 Site vitrine statique (HTML/CSS/JS, aucune dépendance) avec une fonction serveur
 pour les demandes de devis. Conçu pour être déployé sur **Vercel**.
 
+
+> **Pour le moment, le site présente uniquement Exodus Digital · ME-IT.**
+> L'accueil (`src/pages/index.html`) regroupe ME-IT, les sites d'événements et le
+> formulaire de contact. Les pages événementielles sont mises en pause dans
+> `src/en-pause/` (non publiées) et leurs adresses redirigent vers l'accueil
+> (`vercel.json`, rubrique `redirects`). Pour en rouvrir une : la remettre dans
+> `src/pages/`, retirer sa redirection, puis `npm run build`.
+
 ## Pages
 
 | URL | Contenu |
@@ -51,7 +59,7 @@ Après une modification dans `src/`, lancer `npm run build` : les fichiers
    Les réglages sont lus depuis `vercel.json` (rien à changer).
 2. **Settings → Environment Variables** (voir `.env.example`) :
    - `RESEND_API_KEY` — clé https://resend.com pour envoyer les devis ;
-   - `EXODUS_EMAIL_TO` — adresse qui reçoit les demandes (défaut `exevagency@gmail.com`) ;
+   - `EXODUS_EMAIL_TO` — adresse qui reçoit les demandes (défaut `exoduseagency@gmail.com`) ;
    - `EXODUS_EMAIL_FROM` — expéditeur, ex. `Exodus Events <devis@exodusevents.org>`
      (le domaine `exodusevents.org` doit être vérifié dans Resend) ;
    - `DATABASE_URL` — chaîne de connexion de la base **Neon** `exodusevents`

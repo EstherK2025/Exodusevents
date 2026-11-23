@@ -3,5 +3,42 @@
   "buildCommand": "npm run build",
   "outputDirectory": "public",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/digital",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/services",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/experiences",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/partenaires",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/a-propos",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/devis",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/profil",
+      "destination": "/",
+      "permanent": false
+    }
+  ]
 }
