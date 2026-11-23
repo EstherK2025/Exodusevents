@@ -10,6 +10,7 @@ import devis from "../api/devis.js";
 import partenaire from "../api/partenaire.js";
 import admin from "../api/admin.js";
 import digital from "../api/digital.js";
+import avis from "../api/avis.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "public");
 const port = Number(process.env.PORT) || 3000;
@@ -30,7 +31,7 @@ createServer(async (req, res) => {
   const redir = redirections.find((r) => r.source === url.pathname);
   if (redir) { res.statusCode = 307; res.setHeader("Location", redir.destination); return res.end(); }
 
-  const api = { "/api/devis": devis, "/api/partenaire": partenaire, "/api/admin": admin, "/api/digital": digital }[url.pathname];
+  const api = { "/api/devis": devis, "/api/partenaire": partenaire, "/api/admin": admin, "/api/digital": digital, "/api/avis": avis }[url.pathname];
   if (api) {
     let raw = "";
     for await (const c of req) raw += c;

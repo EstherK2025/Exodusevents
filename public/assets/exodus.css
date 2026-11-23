@@ -977,3 +977,24 @@ fieldset { border: 0; display: grid; gap: 16px; min-width: 0; }
 .commit b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.35rem; line-height: 1.05; }
 .commit span { color: var(--mute); font-size: .95rem; }
 @media (max-width: 560px) { .commit { grid-template-columns: 1fr; } .commit > div:nth-child(even) { padding-left: 0; border-left: 0; } }
+
+/* ── Avis clients ──────────────────────────────────────── */
+.reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+.review { border: 1px solid var(--line); background: #fff; padding: 26px 24px; display: grid; gap: 14px; align-content: start; }
+.review .st { color: var(--gold); letter-spacing: 3px; font-size: 18px; }
+.review blockquote { font-family: var(--serif); font-style: italic; font-size: 1.25rem; line-height: 1.4; }
+.review cite { font-style: normal; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.review cite span { display: block; font-weight: 400; color: var(--mute); text-transform: none; letter-spacing: 0; margin-top: 2px; }
+.reviews-empty { border: 1px dashed var(--line); padding: 30px 24px; color: var(--mute); font-family: var(--serif); font-style: italic; font-size: 1.3rem; text-align: center; grid-column: 1 / -1; }
+.review-form-wrap { margin-top: 30px; }
+.review-form-wrap > summary { list-style: none; display: inline-flex; }
+.review-form-wrap > summary::-webkit-details-marker { display: none; }
+.review-form { margin-top: 26px; max-width: 760px; border-top: 1px solid var(--fg); padding-top: 26px; }
+.stars-field legend { font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); margin-bottom: 8px; }
+.stars { display: inline-flex; flex-direction: row-reverse; justify-content: flex-end; justify-self: start; gap: 4px; margin-bottom: 18px; }
+.stars input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.stars label { font-size: 34px; line-height: 1; color: var(--line); cursor: pointer; transition: color .2s; }
+.stars label:hover, .stars label:hover ~ label, .stars input:checked ~ label { color: var(--gold); }
+.stars input:focus-visible + label { outline: 2px solid var(--gold); outline-offset: 2px; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--mute); }
+.check input { margin-top: 3px; width: 18px; height: 18px; accent-color: #0a0a0a; }

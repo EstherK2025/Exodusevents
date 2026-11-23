@@ -46,13 +46,26 @@ CREATE TABLE IF NOT EXISTS partenaires (
   telephone  TEXT,
   lien       TEXT,
   message    TEXT
+);
+CREATE TABLE IF NOT EXISTS avis (
+  id           SERIAL PRIMARY KEY,
+  cree_le      TIMESTAMPTZ NOT NULL DEFAULT now(),
+  statut       TEXT NOT NULL DEFAULT 'nouveau',
+  nom          TEXT,
+  organisation TEXT,
+  note         INTEGER,
+  message      TEXT,
+  courriel     TEXT,
+  langue       TEXT
 );`;
 
 export const TABLES = {
   devis: { nom: "demandes_devis", colonnes: ["type", "services", "date_evenement", "lieu", "invites", "budget", "nom", "courriel", "telephone", "contact", "message"] },
   partenaires: { nom: "partenaires", colonnes: ["entreprise", "nom", "domaine", "ville", "courriel", "telephone", "lien", "message"] },
+  avis: { nom: "avis", colonnes: ["nom", "organisation", "note", "message", "courriel", "langue"] },
 };
-export const STATUTS = ["nouveau", "en_cours", "traite", "archive"];
+// « publie » ne concerne que les avis : seuls ceux-là apparaissent sur le site.
+export const STATUTS = ["nouveau", "en_cours", "traite", "archive", "publie"];
 
 async function preparer() {
   if (!pret) pret = db().query(SCHEMA).catch((e) => { pret = null; throw e; });
@@ -87,4 +100,14 @@ export async function changerStatut(cle, id, statut) {
   await preparer();
   const r = await db().query(`UPDATE ${TABLES[cle].nom} SET statut = $1 WHERE id = $2`, [statut, id]);
   return r.rowCount;
+}
+
+// Avis publiés (affichés sur le site) : jamais le courriel.
+export async function avisPublies() {
+  if (!dbActive) return [];
+  await preparer();
+  const r = await db().query(
+    "SELECT id, cree_le, nom, organisation, note, message FROM avis WHERE statut = 'publie' ORDER BY cree_le DESC LIMIT 30",
+  );
+  return r.rows;
 }

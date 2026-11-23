@@ -221,6 +221,49 @@
   </div>
 </section>
 
+<section class="section section--ivory" id="avis">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal">Avis clients</span>
+      <h2 class="h2 reveal">Ils nous font <em>confiance.</em></h2>
+    </div>
+    <div class="reviews" data-reviews data-empty="Soyez parmi nos premiers clients à partager votre expérience."></div>
+    <details class="review-form-wrap reveal">
+      <summary class="btn btn--ghost">Laisser un avis <span class="arrow">→</span></summary>
+      <form class="review-form" data-simple-form="/api/avis" novalidate>
+        <div class="form-body">
+          <p class="muted" style="margin-bottom:22px">Vous avez travaillé avec nous ? Votre avis aide d'autres entreprises et écoles à nous faire confiance. Il sera publié après vérification.</p>
+          <fieldset class="stars-field">
+            <legend>Votre note *</legend>
+            <div class="stars">
+              <input type="radio" id="n5-fr" name="note" value="5"><label for="n5-fr" title="5">★</label>
+              <input type="radio" id="n4-fr" name="note" value="4"><label for="n4-fr" title="4">★</label>
+              <input type="radio" id="n3-fr" name="note" value="3"><label for="n3-fr" title="3">★</label>
+              <input type="radio" id="n2-fr" name="note" value="2"><label for="n2-fr" title="2">★</label>
+              <input type="radio" id="n1-fr" name="note" value="1"><label for="n1-fr" title="1">★</label>
+            </div>
+          </fieldset>
+          <div class="fields">
+            <div class="field"><label for="a-nom-fr">Votre nom (affiché) *</label><input id="a-nom-fr" name="nom" required autocomplete="name" placeholder="ex. Marie L."></div>
+            <div class="field"><label for="a-org-fr">Entreprise, école ou organisation</label><input id="a-org-fr" name="organisation" autocomplete="organization"></div>
+            <div class="field full"><label for="a-msg-fr">Votre expérience *</label><textarea id="a-msg-fr" name="message" required></textarea></div>
+            <div class="field full"><label for="a-mail-fr">Courriel (non publié, pour vous remercier)</label><input id="a-mail-fr" type="email" name="courriel" autocomplete="email"></div>
+            <label class="check full"><input id="a-ok-fr" type="checkbox" name="consent" value="oui" required> <span>J'accepte que mon avis, mon nom et mon organisation soient publiés sur ce site.</span></label>
+            <div class="hp" aria-hidden="true"><input name="website" tabindex="-1" autocomplete="off"></div>
+          </div>
+          <p class="form-error" role="alert"></p>
+          <div class="form-nav"><button type="submit" class="btn"><span>Envoyer mon avis</span> <span class="arrow">→</span></button></div>
+        </div>
+        <div class="success" hidden>
+          <span class="eyebrow">Avis reçu</span>
+          <h2 class="h2">Merci, <span class="serif-it gilded" data-success-name></span>.</h2>
+          <p class="lead">Votre avis sera publié après vérification.</p>
+        </div>
+      </form>
+    </details>
+  </div>
+</section>
+
 <section class="section section--tight soon-band">
   <div class="wrap soon-row">
     <div>
@@ -325,6 +368,7 @@
           <li><span class="muted">Facebook : Exodus Events Agency</span></li>
           <li><span class="muted">Moncton, Nouveau-Brunswick</span></li>
           <li><a href="/#a-propos">Qui sommes-nous</a></li>
+          <li><a href="/#avis">Avis clients</a></li>
           <li><a href="/confidentialite">Politique de confidentialité</a></li>
         </ul>
       </div>

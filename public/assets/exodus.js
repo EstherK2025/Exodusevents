@@ -647,7 +647,7 @@
     f.addEventListener("submit", function (ev) {
       ev.preventDefault();
       err.textContent = "";
-      var manquant = $$("[required]", f).filter(function (el) { return !el.value.trim(); })[0];
+      var manquant = $$("[required]", f).filter(function (el) { return el.type === "checkbox" ? !el.checked : !el.value.trim(); })[0];
       if (manquant) {
         var lab = f.querySelector('label[for="' + manquant.id + '"]');
         err.textContent = (EN ? "Required field: " : "Champ requis : ") + (lab ? lab.textContent.replace(" *", "") : manquant.name) + ".";
@@ -655,7 +655,7 @@
         return;
       }
       var d = {};
-      $$("input, select, textarea", f).forEach(function (el) { if (el.name) d[el.name] = el.value.trim(); });
+      $$("input, select, textarea", f).forEach(function (el) { if (!el.name) return; if ((el.type === "radio" || el.type === "checkbox") && !el.checked) return; d[el.name] = el.value.trim(); });
       d.lang = EN ? "en" : "fr";
       btn.disabled = true;
       var txt = btn.querySelector("span"), avant = txt.textContent;
@@ -764,4 +764,20 @@
       var sel = $("#d-besoin"); if (sel) sel.value = a.getAttribute("data-besoin");
     });
   });
+  /* ── Avis clients : affichage des avis approuvés ─────── */
+  var revBox = $("[data-reviews]");
+  if (revBox) {
+    var escR = function (t) { return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+    var vide = function () { revBox.innerHTML = '<p class="reviews-empty">' + escR(revBox.getAttribute("data-empty")) + "</p>"; };
+    fetch("/api/avis").then(function (r) { return r.json(); }).then(function (j) {
+      var l = (j && j.avis) || [];
+      if (!l.length) return vide();
+      revBox.innerHTML = l.map(function (a) {
+        var n = Math.max(1, Math.min(5, a.note || 5));
+        return '<figure class="review"><span class="st" aria-label="' + n + '/5">' + "★".repeat(n) + "☆".repeat(5 - n) + "</span>" +
+          "<blockquote>« " + escR(a.message) + " »</blockquote><figcaption><cite>" + escR(a.nom) +
+          (a.organisation ? "<span>" + escR(a.organisation) + "</span>" : "") + "</cite></figcaption></figure>";
+      }).join("");
+    }).catch(vide);
+  }
 })();

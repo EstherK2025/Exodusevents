@@ -221,6 +221,49 @@
   </div>
 </section>
 
+<section class="section section--ivory" id="avis">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal">Client reviews</span>
+      <h2 class="h2 reveal">They trust <em>us.</em></h2>
+    </div>
+    <div class="reviews" data-reviews data-empty="Be one of our first clients to share your experience."></div>
+    <details class="review-form-wrap reveal">
+      <summary class="btn btn--ghost">Leave a review <span class="arrow">→</span></summary>
+      <form class="review-form" data-simple-form="/api/avis" novalidate>
+        <div class="form-body">
+          <p class="muted" style="margin-bottom:22px">Have you worked with us? Your review helps other businesses and schools trust us. It will be published after review.</p>
+          <fieldset class="stars-field">
+            <legend>Your rating *</legend>
+            <div class="stars">
+              <input type="radio" id="n5-en" name="note" value="5"><label for="n5-en" title="5">★</label>
+              <input type="radio" id="n4-en" name="note" value="4"><label for="n4-en" title="4">★</label>
+              <input type="radio" id="n3-en" name="note" value="3"><label for="n3-en" title="3">★</label>
+              <input type="radio" id="n2-en" name="note" value="2"><label for="n2-en" title="2">★</label>
+              <input type="radio" id="n1-en" name="note" value="1"><label for="n1-en" title="1">★</label>
+            </div>
+          </fieldset>
+          <div class="fields">
+            <div class="field"><label for="a-nom-en">Your name (displayed) *</label><input id="a-nom-en" name="nom" required autocomplete="name" placeholder="e.g. Mary L."></div>
+            <div class="field"><label for="a-org-en">Business, school or organization</label><input id="a-org-en" name="organisation" autocomplete="organization"></div>
+            <div class="field full"><label for="a-msg-en">Your experience *</label><textarea id="a-msg-en" name="message" required></textarea></div>
+            <div class="field full"><label for="a-mail-en">Email (not published, to thank you)</label><input id="a-mail-en" type="email" name="courriel" autocomplete="email"></div>
+            <label class="check full"><input id="a-ok-en" type="checkbox" name="consent" value="oui" required> <span>I agree that my review, name and organization may be published on this website.</span></label>
+            <div class="hp" aria-hidden="true"><input name="website" tabindex="-1" autocomplete="off"></div>
+          </div>
+          <p class="form-error" role="alert"></p>
+          <div class="form-nav"><button type="submit" class="btn"><span>Send my review</span> <span class="arrow">→</span></button></div>
+        </div>
+        <div class="success" hidden>
+          <span class="eyebrow">Review received</span>
+          <h2 class="h2">Thank you, <span class="serif-it gilded" data-success-name></span>.</h2>
+          <p class="lead">Your review will be published once verified.</p>
+        </div>
+      </form>
+    </details>
+  </div>
+</section>
+
 <section class="section section--tight soon-band">
   <div class="wrap soon-row">
     <div>
@@ -325,6 +368,7 @@
           <li><span class="muted">Facebook: Exodus Events Agency</span></li>
           <li><span class="muted">Moncton, New Brunswick</span></li>
           <li><a href="/en#a-propos">About us</a></li>
+          <li><a href="/en#avis">Client reviews</a></li>
           <li><a href="/privacy">Privacy policy</a></li>
         </ul>
       </div>

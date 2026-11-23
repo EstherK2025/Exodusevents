@@ -5,11 +5,13 @@
   var KEY = "exodus-admin";
   var pass = "";
   try { pass = sessionStorage.getItem(KEY) || ""; } catch (e) {}
-  var tab = "devis", data = { devis: [], partenaires: [] };
+  var tab = "devis", data = { devis: [], partenaires: [], avis: [] };
   var LIB = { nouveau: "Nouveau", en_cours: "En cours", traite: "Traité", archive: "Archivé" };
+  var LIB_AVIS = { nouveau: "À approuver", publie: "Publié sur le site", archive: "Refusé / masqué" };
   var CHAMPS = {
     devis: [["type", "Événement"], ["services", "Services"], ["date_evenement", "Date"], ["invites", "Invités"], ["lieu", "Lieu"], ["budget", "Budget"], ["telephone", "Téléphone"], ["contact", "Contact préféré"]],
-    partenaires: [["entreprise", "Entreprise"], ["domaine", "Domaine"], ["ville", "Ville"], ["telephone", "Téléphone"], ["lien", "Site / Instagram"]]
+    partenaires: [["entreprise", "Entreprise"], ["domaine", "Domaine"], ["ville", "Ville"], ["telephone", "Téléphone"], ["lien", "Site / Instagram"]],
+    avis: [["note", "Note"], ["organisation", "Organisation"], ["courriel", "Courriel"], ["langue", "Langue"]]
   };
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
 
@@ -27,7 +29,7 @@
   }
 
   function charger() {
-    return Promise.all(["devis", "partenaires"].map(function (t) {
+    return Promise.all(["devis", "partenaires", "avis"].map(function (t) {
       return api("GET", "?table=" + t).then(function (j) { data[t] = j.lignes; });
     })).then(function () {
       $("#admin-login").hidden = true;
@@ -38,7 +40,7 @@
   }
 
   function afficher() {
-    ["devis", "partenaires"].forEach(function (t) {
+    ["devis", "partenaires", "avis"].forEach(function (t) {
       var n = data[t].filter(function (l) { return l.statut === "nouveau"; }).length;
       $('[data-count="' + t + '"]').textContent = n ? n + " nouveau" + (n > 1 ? "x" : "") : "";
     });
@@ -49,18 +51,19 @@
     var liste = $("[data-list]");
     if (!lignes.length) { liste.innerHTML = '<p class="muted" style="padding:40px 0">Aucune demande pour le moment.</p>'; return; }
     liste.innerHTML = lignes.map(function (l) {
-      var titre = tab === "devis" ? (l.type || "Demande") + " — " + (l.nom || "") : (l.entreprise || "") + " — " + (l.domaine || "");
+      var titre = tab === "avis" ? "★".repeat(l.note || 0) + " — " + (l.nom || "") : tab === "devis" ? (l.type || "Demande") + " — " + (l.nom || "") : (l.entreprise || "") + " — " + (l.domaine || "");
       var details = CHAMPS[tab].filter(function (c) { return l[c[0]]; })
         .map(function (c) { return "<div><dt>" + c[1] + "</dt><dd>" + esc(l[c[0]]) + "</dd></div>"; }).join("");
-      var options = Object.keys(LIB).map(function (s) { return '<option value="' + s + '"' + (s === l.statut ? " selected" : "") + ">" + LIB[s] + "</option>"; }).join("");
+      var L = tab === "avis" ? LIB_AVIS : LIB;
+      var options = Object.keys(L).map(function (s) { return '<option value="' + s + '"' + (s === l.statut ? " selected" : "") + ">" + L[s] + "</option>"; }).join("");
       return '<article class="admin-card" data-statut="' + esc(l.statut) + '">' +
-        '<header><div><small>' + (tab === "devis" ? "D-" : "P-") + l.id + " · " + new Date(l.cree_le).toLocaleString("fr-CA", { dateStyle: "medium", timeStyle: "short" }) + "</small>" +
+        '<header><div><small>' + (tab === "devis" ? "D-" : tab === "avis" ? "A-" : "P-") + l.id + " · " + new Date(l.cree_le).toLocaleString("fr-CA", { dateStyle: "medium", timeStyle: "short" }) + "</small>" +
         "<h3>" + esc(titre) + "</h3></div>" +
         '<select data-id="' + l.id + '" aria-label="Statut">' + options + "</select></header>" +
         '<dl class="recap">' + details + "</dl>" +
         (l.message ? '<p class="admin-msg">' + esc(l.message) + "</p>" : "") +
-        '<div class="btn-row"><a class="link" href="mailto:' + esc(l.courriel) + '">Écrire à ' + esc(l.nom || l.courriel) + " →</a>" +
-        (l.telephone ? '<a class="link" href="tel:' + esc(l.telephone) + '">Appeler →</a>' : "") + "</div></article>";
+        (l.courriel ? '<div class="btn-row"><a class="link" href="mailto:' + esc(l.courriel) + '">Écrire à ' + esc(l.nom || l.courriel) + " →</a>" +
+        (l.telephone ? '<a class="link" href="tel:' + esc(l.telephone) + '">Appeler →</a>' : "") + "</div>" : "") + "</article>";
     }).join("");
   }
 
