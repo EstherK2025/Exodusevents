@@ -998,3 +998,13 @@ fieldset { border: 0; display: grid; gap: 16px; min-width: 0; }
 .stars input:focus-visible + label { outline: 2px solid var(--gold); outline-offset: 2px; }
 .check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--mute); }
 .check input { margin-top: 3px; width: 18px; height: 18px; accent-color: #0a0a0a; }
+
+/* ── Notre histoire ──────────────────────────────────── */
+.story { list-style: none; margin: 30px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--fg); }
+.story li { padding: 16px 16px 0 0; display: grid; gap: 6px; position: relative; }
+.story li::before { content: ""; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--fg); }
+.story li:nth-child(2)::before { background: var(--bg, #fff); border: 1px solid var(--fg); }
+.story li:last-child::before { background: var(--gold); }
+.story b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.5rem; line-height: 1; }
+.story span { font-size: 14px; color: var(--mute); line-height: 1.4; }
+@media (max-width: 560px) { .story { grid-template-columns: 1fr; border-top: 0; border-left: 1px solid var(--fg); padding-left: 18px; gap: 14px; } .story li { padding: 0; } .story li::before { top: 4px; left: -23px; } }
