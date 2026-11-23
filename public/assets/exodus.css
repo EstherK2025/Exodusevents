@@ -1014,3 +1014,8 @@ fieldset { border: 0; display: grid; gap: 16px; min-width: 0; }
 .story b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.5rem; line-height: 1; }
 .story span { font-size: 14px; color: var(--mute); line-height: 1.4; }
 @media (max-width: 560px) { .story { grid-template-columns: 1fr; border-top: 0; border-left: 1px solid var(--fg); padding-left: 18px; gap: 14px; } .story li { padding: 0; } .story li::before { top: 4px; left: -23px; } }
+
+/* ── Pourquoi Exodus ─────────────────────────────────── */
+.why { margin-top: 30px; padding: 22px 0 4px 22px; border-left: 2px solid var(--gold); display: grid; gap: 10px; }
+.why p { color: var(--mute); line-height: 1.6; max-width: 60ch; }
+.why .why-motto { font-family: var(--serif); font-style: italic; font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.15; color: var(--fg); }
