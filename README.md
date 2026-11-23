@@ -13,6 +13,10 @@ pour les demandes de devis. Conçu pour être déployé sur **Vercel**.
 > `src/en-pause/` (non publiées) et leurs adresses redirigent vers l'accueil
 > (`vercel.json`, rubrique `redirects`). Pour en rouvrir une : la remettre dans
 > `src/pages/`, retirer sa redirection, puis `npm run build`.
+>
+> **Site bilingue** : `src/pages/index.html` (français, `/`) et `src/pages/en.html`
+> (anglais, `/en`). En-têtes et pieds de page : `src/partials/header(-en).html`,
+> `footer(-en).html`. Le bouton FR / EN de l'en-tête bascule entre les deux.
 
 ## Pages
 
@@ -59,7 +63,7 @@ Après une modification dans `src/`, lancer `npm run build` : les fichiers
    Les réglages sont lus depuis `vercel.json` (rien à changer).
 2. **Settings → Environment Variables** (voir `.env.example`) :
    - `RESEND_API_KEY` — clé https://resend.com pour envoyer les devis ;
-   - `EXODUS_EMAIL_TO` — adresse qui reçoit les demandes (défaut `exoduseagency@gmail.com`) ;
+   - `EXODUS_EMAIL_TO` — adresse qui reçoit les demandes (défaut `contact@exoduseagency.ca`) ;
    - `EXODUS_EMAIL_FROM` — expéditeur, ex. `Exodus Events <devis@exoduseagency.ca>`
      (le domaine `exoduseagency.ca` doit être vérifié dans Resend) ;
    - `DATABASE_URL` — chaîne de connexion de la base **Neon** `exodusevents`

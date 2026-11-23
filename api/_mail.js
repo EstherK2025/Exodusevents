@@ -1,7 +1,7 @@
 // Utilitaires partagés par les fonctions /api (fichier préfixé « _ » :
 // Vercel ne l'expose pas comme route).
 
-export const TO = process.env.EXODUS_EMAIL_TO || "exoduseagency@gmail.com";
+export const TO = process.env.EXODUS_EMAIL_TO || "contact@exoduseagency.ca";
 const FROM = process.env.EXODUS_EMAIL_FROM || "Exodus Events <onboarding@resend.dev>";
 
 export const texte = (v, max = 200) => String(v ?? "").trim().slice(0, max);

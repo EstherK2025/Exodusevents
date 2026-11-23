@@ -18,7 +18,11 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const src = join(root, "src");
 const out = join(root, "public");
 const part = (n) => readFileSync(join(src, "partials", n + ".html"), "utf8");
-const [head, header, footer] = ["head", "header", "footer"].map(part);
+// Parties communes par langue : header.html (fr) / header-en.html (en), etc.
+const parts = {
+  fr: { head: part("head"), header: part("header"), footer: part("footer") },
+  en: { head: part("head").replace('<html lang="fr-CA">', '<html lang="en-CA">'), header: part("header-en"), footer: part("footer-en") },
+};
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
 for (const file of readdirSync(join(src, "pages")).filter((f) => f.endsWith(".html"))) {
@@ -31,15 +35,21 @@ for (const file of readdirSync(join(src, "pages")).filter((f) => f.endsWith(".ht
       return [l.slice(0, i).trim(), l.slice(i + 1).trim()];
     }),
   );
+  const lang = meta.lang === "en" ? "en" : "fr";
+  const { head, header, footer } = parts[lang];
+  // Lien vers la même page dans l'autre langue (meta « alt »), sinon l'accueil.
+  const alt = meta.alt || (lang === "en" ? "/" : "/en");
+  const self = meta.path || (lang === "en" ? "/en" : "/");
   const nav = header
+    .replaceAll("{{alt}}", alt)
     .replace("{{headerClass}}", meta.header === "solid" ? " is-solid" : "")
     .replaceAll(`data-nav="${meta.nav}"`, 'aria-current="page"')
     .replace(/ data-nav="[^"]*"/g, "");
   const html =
-    head.replaceAll("{{title}}", esc(meta.title)).replaceAll("{{robots}}", meta.robots || "index, follow").replaceAll("{{description}}", esc(meta.description)) +
+    head.replaceAll("{{self}}", self).replaceAll("{{alt}}", alt).replaceAll("{{title}}", esc(meta.title)).replaceAll("{{robots}}", meta.robots || "index, follow").replaceAll("{{description}}", esc(meta.description)) +
     nav +
     raw.slice(m[0].length) +
-    footer;
+    footer.replaceAll("{{alt}}", alt);
   writeFileSync(join(out, file), html);
   console.log("✓ public/" + file);
 }

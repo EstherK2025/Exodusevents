@@ -10,6 +10,7 @@
   "use strict";
   var root = document.documentElement;
   root.classList.add("js");
+  var EN = /^en/.test(document.documentElement.lang);
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var $ = function (s, r) { return (r || document).querySelector(s); };
@@ -631,7 +632,7 @@
         var corps = "Type : " + d.typeLabel + "\nServices : " + d.services.join(", ") + "\nDate : " + (d.date || "à définir") +
           "\nInvités : " + d.invites + "\nLieu : " + (d.lieu || "à définir") + "\nBudget : " + (d.budget || "à discuter") +
           "\n\n" + d.message + "\n\n" + d.nom + "\n" + d.telephone;
-        var mail = "mailto:exoduseagency@gmail.com?subject=" + encodeURIComponent("Demande de consultation — " + d.typeLabel) + "&body=" + encodeURIComponent(corps);
+        var mail = "mailto:contact@exoduseagency.ca?subject=" + encodeURIComponent("Demande de consultation — " + d.typeLabel) + "&body=" + encodeURIComponent(corps);
         errBox.innerHTML = escapeHtml(err.message || "L'envoi n'a pas abouti.") +
           " Vous pouvez aussi <a href=\"" + mail + "\">nous écrire directement</a>.";
         submit.disabled = false;
@@ -649,15 +650,16 @@
       var manquant = $$("[required]", f).filter(function (el) { return !el.value.trim(); })[0];
       if (manquant) {
         var lab = f.querySelector('label[for="' + manquant.id + '"]');
-        err.textContent = "Champ requis : " + (lab ? lab.textContent.replace(" *", "") : manquant.name) + ".";
+        err.textContent = (EN ? "Required field: " : "Champ requis : ") + (lab ? lab.textContent.replace(" *", "") : manquant.name) + ".";
         manquant.focus();
         return;
       }
       var d = {};
       $$("input, select, textarea", f).forEach(function (el) { if (el.name) d[el.name] = el.value.trim(); });
+      d.lang = EN ? "en" : "fr";
       btn.disabled = true;
       var txt = btn.querySelector("span"), avant = txt.textContent;
-      txt.textContent = "Envoi…";
+      txt.textContent = EN ? "Sending…" : "Envoi…";
       fetch(f.getAttribute("data-simple-form"), {
         method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(d)
       }).then(function (r) {
@@ -673,9 +675,9 @@
       }).catch(function (e) {
         var corps = Object.keys(d).filter(function (k) { return k !== "website" && d[k]; })
           .map(function (k) { return k + " : " + d[k]; }).join("\n");
-        var mail = "mailto:exoduseagency@gmail.com?subject=" + encodeURIComponent(f.getAttribute("data-simple-form") === "/api/digital" ? "Exodus Digital — " + (d.besoin || "projet") : "Candidature partenaire — " + (d.entreprise || "")) + "&body=" + encodeURIComponent(corps);
-        err.innerHTML = (e.message || "L'envoi n'a pas abouti.").replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }) +
-          " Vous pouvez aussi <a href=\"" + mail + "\">nous écrire directement</a>.";
+        var mail = "mailto:contact@exoduseagency.ca?subject=" + encodeURIComponent(f.getAttribute("data-simple-form") === "/api/digital" ? "Exodus Digital — " + (d.besoin || "projet") : "Candidature partenaire — " + (d.entreprise || "")) + "&body=" + encodeURIComponent(corps);
+        err.innerHTML = (e.message || (EN ? "Your request could not be sent." : "L'envoi n'a pas abouti.")).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }) +
+          (EN ? " You can also <a href=\"" + mail + "\">email us directly</a>." : " Vous pouvez aussi <a href=\"" + mail + "\">nous écrire directement</a>.");
         btn.disabled = false;
         txt.textContent = avant;
       });
@@ -684,7 +686,19 @@
   /* ── ME-IT : terminal qui s'écrit et pluie binaire ─────── */
   var termBody = $("[data-term-body]");
   if (termBody) {
-    var lignes = [
+    var lignes = EN ? [
+      ["p", "$ me-it --diagnostic --organization"],
+      ["", "\n> website check .................. "], ["ok", "OK"],
+      ["", "\n> workstations (12) .............. "], ["ok", "up to date"],
+      ["", "\n> weak passwords ................. "], ["warn", "3 found"],
+      ["", "\n> phishing emails ................ "], ["warn", "high risk"],
+      ["p", "\n\n$ me-it --plan"],
+      ["", "\n  [01] web.dev        secure, mobile website"],
+      ["", "\n  [02] os.setup       computers configured"],
+      ["", "\n  [03] cyber.training team trained"],
+      ["", "\n  [04] cyber.talks    talk scheduled"],
+      ["p", "\n\n$ "], ["ok", "system protected ✓"]
+    ] : [
       ["p", "$ me-it --diagnostic --organisation"],
       ["", "\n> analyse du site web ............ "], ["ok", "OK"],
       ["", "\n> postes de travail (12) ......... "], ["ok", "à jour"],

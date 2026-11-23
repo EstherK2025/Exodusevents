@@ -21,14 +21,16 @@ export default async function handler(req, res) {
     telephone: texte(body.telephone, 40),
     message: texte(body.message, 3000),
   };
-  if (!d.nom) return res.status(400).json({ error: "Indiquez votre nom." });
-  if (!d.profil || !d.besoin) return res.status(400).json({ error: "Précisez votre profil et votre besoin." });
-  if (!courrielValide(d.courriel)) return res.status(400).json({ error: "Adresse courriel invalide." });
+  const en = body.lang === "en";
+  if (!d.nom) return res.status(400).json({ error: en ? "Please enter your name." : "Indiquez votre nom." });
+  if (!d.profil || !d.besoin) return res.status(400).json({ error: en ? "Please tell us who you are and what you need." : "Précisez votre profil et votre besoin." });
+  if (!courrielValide(d.courriel)) return res.status(400).json({ error: en ? "Invalid email address." : "Adresse courriel invalide." });
 
   const lignes = [
     ["Besoin", d.besoin],
     ["Profil", d.profil],
     ["Organisation", d.organisation || "—"],
+    ["Langue", en ? "Anglais" : "Français"],
     ["Nom", d.nom],
     ["Courriel", d.courriel],
     ["Téléphone", d.telephone || "—"],
