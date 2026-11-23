@@ -185,9 +185,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
   clip-path: inset(0 0 100% 0); transition: clip-path 0.8s var(--ease); visibility: hidden;
 }
 .menu-open .mobile-menu { clip-path: inset(0 0 0 0); visibility: visible; }
-.mobile-menu nav { display: grid; }
+.mobile-menu nav { display: grid; gap: 6px; }
 .mobile-menu nav a {
-  font-family: var(--display); text-transform: uppercase; font-size: clamp(2.6rem, 12vw, 4.6rem); line-height: 1;
+  font-family: var(--display); text-transform: uppercase; font-size: clamp(1.9rem, 8.5vw, 3.2rem); line-height: 1.05;
   text-decoration: none; display: flex; align-items: baseline; gap: 14px; padding-block: 4px;
   transform: translateY(40px); opacity: 0; transition: transform 0.8s var(--ease), opacity 0.8s var(--ease), color 0.3s;
 }

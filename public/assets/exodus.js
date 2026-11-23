@@ -117,13 +117,15 @@
     document.body.classList.toggle("menu-open", open);
     if (toggle) {
       toggle.setAttribute("aria-expanded", String(open));
-      toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
-      var t = $("i", toggle); if (t) t.textContent = open ? "Fermer" : "Menu";
+      var en = /^en/.test(document.documentElement.lang);
+      toggle.setAttribute("aria-label", open ? (en ? "Close menu" : "Fermer le menu") : (en ? "Open menu" : "Ouvrir le menu"));
+      var t = $("i", toggle); if (t) t.textContent = open ? (en ? "Close" : "Fermer") : "Menu";
     }
     if (menu) menu.setAttribute("aria-hidden", String(!open));
   }
   if (toggle) toggle.addEventListener("click", function () { buzz(6); setMenu(!document.body.classList.contains("menu-open")); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+  if (menu) menu.addEventListener("click", function (e) { if (e.target.closest("a[href]")) setMenu(false); });
 
   /* ── Année du pied de page ─────────────────────────── */
   $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
