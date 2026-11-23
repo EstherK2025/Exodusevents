@@ -139,10 +139,12 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .link:hover { background-size: 0 1px; background-position: 100% 100%; }
 
-/* ── En-tête : mélange « différence », lisible sur noir comme sur blanc ── */
+/* ── En-tête : fond sombre fixe, lisible au-dessus de tout le contenu ── */
 .site-header {
   position: fixed; inset: 0 0 auto; z-index: 100; height: var(--header-h);
-  mix-blend-mode: difference; color: #fff; pointer-events: none;
+  color: #fff;
+  background: rgba(22, 22, 22, 0.88); -webkit-backdrop-filter: saturate(140%) blur(14px); backdrop-filter: saturate(140%) blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .site-header .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: none; padding-inline: max(20px, 3vw); }
 .site-header a, .site-header button { pointer-events: auto; }
