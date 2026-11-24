@@ -143,15 +143,15 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .site-header {
   position: fixed; inset: 0 0 auto; z-index: 100; height: var(--header-h);
   color: #fff;
-  background: rgba(22, 22, 22, 0.88); -webkit-backdrop-filter: saturate(140%) blur(14px); backdrop-filter: saturate(140%) blur(14px);
+  background: #141414;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .site-header .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: none; padding-inline: max(20px, 3vw); }
 .site-header a, .site-header button { pointer-events: auto; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand-logo { height: 46px; width: auto; flex: none; }
-.brand-mark { height: 44px; width: auto; flex: none; }
-.brand-word { height: 19px; width: auto; }
+.brand-mark { height: 50px; width: auto; flex: none; }
+.brand-word { height: 22px; width: auto; }
 .site-footer .brand-logo { height: 96px; }
 .nav { display: flex; align-items: center; gap: 28px; }
 .nav a:not(.btn) {
@@ -209,8 +209,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .menu-toggle { display: inline-flex; }
   :root { --header-h: 66px; }
   .brand-logo { height: 38px; }
-  .brand-mark { height: 38px; }
-  .brand-word { height: 15px; }
+  .brand-mark { height: 40px; }
+  .brand-word { height: 17px; }
 }
 
 /* ── Héros de l'accueil ────────────────────────────────── */
